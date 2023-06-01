@@ -1,0 +1,190 @@
+--Obtain counts of NULL values
+SELECT	
+	COUNT(CASE WHEN agency IS NULL THEN usajobs_control_number END) AS agency_null_count
+	,COUNT(CASE WHEN bureau IS NULL THEN usajobs_control_number END) AS bureau_null_count
+	,COUNT(CASE WHEN pay_plan IS NULL THEN usajobs_control_number END) AS pay_plan_null_count
+	,COUNT(CASE WHEN job_series_number IS NULL THEN usajobs_control_number END) AS job_series_number_null_count
+	,COUNT(CASE WHEN job_series_title IS NULL THEN usajobs_control_number END) AS job_series_title_null_count
+	,COUNT(CASE WHEN grade IS NULL THEN usajobs_control_number END) AS grade_null_count
+	,COUNT(CASE WHEN usajobs_control_number IS NULL THEN usajobs_control_number END) AS usajobs_control_number_null_count
+	,COUNT(CASE WHEN vacancy_job_title IS NULL THEN usajobs_control_number END) AS vacancy_job_title_null_count
+	,COUNT(CASE WHEN vacancy_announcement_types IS NULL THEN usajobs_control_number END) AS vacancy_announcement_types_null_count
+	,COUNT(CASE WHEN announcement_type IS NULL THEN usajobs_control_number END) AS announcement_type_null_count
+	,COUNT(CASE WHEN announcement_locations IS NULL THEN usajobs_control_number END) AS announcement_locations_null_count
+	,COUNT(CASE WHEN announcement_open_date IS NULL THEN usajobs_control_number END) AS announcement_open_date_null_count
+	,COUNT(CASE WHEN announcement_close_date IS NULL THEN usajobs_control_number END) AS announcement_close_date_null_count
+	,COUNT(CASE WHEN announcement_open_date_fy IS NULL THEN usajobs_control_number END) AS announcement_open_date_fy_null_count
+	,COUNT(CASE WHEN announcement_close_date_fy IS NULL THEN usajobs_control_number END) AS announcement_close_date_fy_null_count
+	,COUNT(CASE WHEN application_limit_set IS NULL THEN usajobs_control_number END) AS application_limit_set_null_count
+	,COUNT(CASE WHEN application_limit IS NULL THEN usajobs_control_number END) AS application_limit_null_count
+	,COUNT(CASE WHEN assessment_used IS NULL THEN usajobs_control_number END) AS assessment_used_null_count
+	,COUNT(CASE WHEN off_the_shelf_assessment IS NULL THEN usajobs_control_number END) AS off_the_shelf_assessment_null_count
+	,COUNT(CASE WHEN assessment_questionnaire_used IS NULL THEN usajobs_control_number END) AS assessment_questionnaire_used_null_count
+	,COUNT(CASE WHEN other_assessment_type_used IS NULL THEN usajobs_control_number END) AS other_assessment_type_used_null_count
+	,COUNT(CASE WHEN selection_made_off_this_job_announcement IS NULL THEN usajobs_control_number END) AS selection_made_off_this_job_announcement_null_count
+	,COUNT(CASE WHEN number_of_selections_made_off_this_job_announcement IS NULL THEN usajobs_control_number END) AS number_of_selections_made_off_this_job_announcement_null_count
+	,COUNT(CASE WHEN selection_made_through_separate_announcement IS NULL THEN usajobs_control_number END) AS selection_made_through_separate_announcement_null_count
+	,COUNT(CASE WHEN source IS NULL THEN usajobs_control_number END) AS source_null_count
+	,COUNT(CASE WHEN appointment_type IS NULL THEN usajobs_control_number END) AS appointment_type_null_count
+	,COUNT(CASE WHEN appointment_type_list IS NULL THEN usajobs_control_number END) AS appointment_type_list_null_count
+	,COUNT(CASE WHEN additional_manual_assessment_used IS NULL THEN usajobs_control_number END) AS additional_manual_assessment_used_null_count
+	,COUNT(CASE WHEN manual_assessment_method_details_list IS NULL THEN usajobs_control_number END) AS manual_assessment_method_details_list_null_count
+	,COUNT(CASE WHEN applicant_eligibility_public IS NULL THEN usajobs_control_number END) AS applicant_eligibility_public_null_count
+	,COUNT(CASE WHEN applicant_eligibility_internal IS NULL THEN usajobs_control_number END) AS applicant_eligibility_internal_null_count
+	,COUNT(CASE WHEN applicant_eligibility_status IS NULL THEN usajobs_control_number END) AS applicant_eligibility_status_null_count
+	,COUNT(CASE WHEN applicant_eligibility_usajobs_internal IS NULL THEN usajobs_control_number END) AS applicant_eligibility_usajobs_internal_null_count
+	,COUNT(CASE WHEN assessment_groupings IS NULL THEN usajobs_control_number END) AS assessment_groupings_null_count
+	,COUNT(CASE WHEN appointment_type_groupings IS NULL THEN usajobs_control_number END) AS appointment_type_groupings_null_count
+	,COUNT(CASE WHEN vacancy_eligibility_list IS NULL THEN usajobs_control_number END) AS vacancy_eligibility_list_null_count
+	,COUNT(CASE WHEN total_applications IS NULL THEN usajobs_control_number END) AS total_applications_null_count
+	,COUNT(CASE WHEN appointing_authority_list IS NULL THEN usajobs_control_number END) AS appointing_authority_list_null_count
+	,COUNT(CASE WHEN service_type IS NULL THEN usajobs_control_number END) AS service_type_null_count
+	,COUNT(CASE WHEN scoring_option IS NULL THEN usajobs_control_number END) AS scoring_option_null_count
+FROM fed_hiring;
+
+--Check for duplicate usajobs control numbers 
+SELECT 
+	usajobs_control_number
+	,COUNT(usajobs_control_number)
+FROM fed_hiring
+	GROUP BY usajobs_control_number
+	HAVING COUNT(usajobs_control_number) > 1;
+
+--Obtain counts for job announcements for all years prior to 2023
+SELECT 
+	COUNT(usajobs_control_number) as announcement_count
+	,announcement_open_date_fy
+FROM fed_hiring
+	WHERE announcement_open_date_fy != 2023
+	GROUP BY announcement_open_date_fy;
+
+--Obtain total count for all rows where fiscal year does not equal 2018, 2019, and 2023
+SELECT COUNT(*)
+FROM fed_hiring
+WHERE announcement_open_date_fy NOT IN (2018,2019,2023);
+
+--Select counts of announcements by agency
+SELECT 
+	agency
+	,COUNT(usajobs_control_number) as announcement_count
+	,ROUND(COUNT(usajobs_control_number) * 100.0 / SUM(COUNT(*)) OVER(),2) as ratio
+FROM fed_hiring
+	WHERE announcement_open_date_fy NOT IN (2018,2019,2023)
+	GROUP BY agency
+	ORDER BY COUNT(usajobs_control_number) DESC;
+
+
+--Obtain counts of announcements by agency by year as well as the percentages for each agency
+SELECT 
+	agency
+	,announcement_open_date_fy as fiscal_yr
+	,COUNT(usajobs_control_number) as announcement_count
+	,ROUND(COUNT(usajobs_control_number) * 100.0 / SUM(COUNT(*)) OVER(PARTITION BY announcement_open_date_fy),2) as percentage
+FROM fed_hiring
+	WHERE announcement_open_date_fy NOT IN (2018,2019,2023)
+	GROUP BY agency, announcement_open_date_fy
+	ORDER BY announcement_open_date_fy, COUNT(usajobs_control_number) DESC;
+
+--Obtain counts of announcements by year
+SELECT 
+	COUNT(usajobs_control_number) as announcement_count
+	,announcement_open_date_fy
+FROM fed_hiring
+	WHERE announcement_open_date_fy NOT IN (2018,2019,2023)
+	GROUP BY announcement_open_date_fy;
+	
+--Select counts of announcements by agency, filtered down to 'analyst' roles
+SELECT 
+	agency
+	,COUNT(usajobs_control_number) as announcement_count
+	,ROUND(COUNT(usajobs_control_number) * 100.0 / SUM(COUNT(*)) OVER(),2) as ratio
+FROM fed_hiring
+	WHERE announcement_open_date_fy NOT IN (2018,2019,2023)
+	GROUP BY agency
+	ORDER BY COUNT(usajobs_control_number) DESC;
+
+--Obtain counts of announcements by fiscal agency, fiscal year, and calculate absolute YoY change/% YoY change
+SELECT 
+	agency
+	,announcement_open_date_fy as fiscal_yr
+	,COUNT(usajobs_control_number) as announcement_count
+	,ROUND(COUNT(usajobs_control_number) * 100.0 / SUM(COUNT(*)) OVER(PARTITION BY announcement_open_date_fy),2) as percentage
+	,ROUND(COUNT(usajobs_control_number) - LAG(COUNT(usajobs_control_number)) OVER(PARTITION BY agency ORDER BY agency, announcement_open_date_fy)) as absolute_yoy_diff
+	,ROUND((COUNT(usajobs_control_number) - LAG(COUNT(usajobs_control_number)) OVER(PARTITION BY agency ORDER BY agency, announcement_open_date_fy))*1.0 / 
+	  	(LAG(COUNT(usajobs_control_number)) OVER(PARTITION BY agency ORDER BY agency, announcement_open_date_fy)) * 100,2) as yoy_percent_diff
+FROM fed_hiring
+	WHERE announcement_open_date_fy NOT IN (2018,2019,2023) AND lower(vacancy_job_title) LIKE '%analyst%'
+	GROUP BY agency, announcement_open_date_fy
+	ORDER BY agency, announcement_open_date_fy, COUNT(usajobs_control_number) DESC;
+
+--Obtain average intervals, applications, selections by agency
+with t1 AS (SELECT
+	agency
+	,vacancy_job_title
+	,total_applications
+	,announcement_open_date
+	,announcement_close_date
+	,announcement_close_date - announcement_open_date as interval
+	,number_of_selections_made_off_this_job_announcement as selections
+FROM fed_hiring
+	WHERE announcement_open_date_fy NOT IN (2018,2019,2023)
+	ORDER BY announcement_close_date - announcement_open_date DESC)
+
+SELECT 
+	agency
+	,ROUND(AVG(interval),2) as avg_interval
+	,ROUND(AVG(total_applications),2) as avg_applications
+	,ROUND(AVG(selections),2) as avg_selections
+FROM t1
+	GROUP BY agency; 
+
+--Obtain average (analyst) intervals, applications, selections by agency
+with t1 AS (SELECT
+	agency
+	,vacancy_job_title
+	,total_applications
+	,announcement_open_date
+	,announcement_close_date
+	,announcement_close_date - announcement_open_date as interval
+	,number_of_selections_made_off_this_job_announcement as selections
+FROM fed_hiring
+	WHERE announcement_open_date_fy NOT IN (2018,2019,2023) AND lower(vacancy_job_title) LIKE '%analyst%'
+	ORDER BY announcement_close_date - announcement_open_date DESC)
+
+SELECT 
+	agency
+	,ROUND(AVG(interval),2) as avg_interval
+	,ROUND(AVG(total_applications),2) as avg_applications
+	,ROUND(AVG(selections),2) as avg_selections
+FROM t1
+	GROUP BY agency; 
+
+--Obtain counts of individual job titles 
+SELECT 
+	LOWER(vacancy_job_title)
+	,COUNT(usajobs_control_number) as count
+	,ROUND(COUNT(LOWER(usajobs_control_number)) * 100.0 / SUM(COUNT(*)) OVER(),2) as percentage
+FROM fed_hiring
+	WHERE announcement_open_date_fy NOT IN (2018,2019,2023)
+	GROUP BY LOWER(vacancy_job_title)
+	ORDER BY COUNT(LOWER(usajobs_control_number)) DESC
+
+--Obtain announcement counts for most common analyst roles
+WITH t1 AS (SELECT 
+	announcement_open_date_fy as fy
+	,CASE WHEN LOWER(vacancy_job_title) = 'program analyst' THEN 1 ELSE 0 END AS program_analyst_count
+	,CASE WHEN LOWER(vacancy_job_title) = 'budget analyst' THEN 1 ELSE 0 END AS budget_analyst_count
+	,CASE WHEN LOWER(vacancy_job_title) = 'management analyst' THEN 1 ELSE 0 END AS management_analyst_count
+	,CASE WHEN LOWER(vacancy_job_title) = 'management and program analyst' THEN 1 ELSE 0 END AS management_and_program_analyst_count
+FROM fed_hiring
+	WHERE announcement_open_date_fy NOT IN (2018,2019,2023)) 
+
+SELECT 
+	fy
+	,SUM(program_analyst_count) as sum_program_analyst
+	,SUM(budget_analyst_count) as sum_budget_analyst
+	,SUM(management_analyst_count) as sum_management_analyst
+	,SUM(management_and_program_analyst_count) as sum_management_and_program_analyst
+FROM t1
+	GROUP BY fy;
+
