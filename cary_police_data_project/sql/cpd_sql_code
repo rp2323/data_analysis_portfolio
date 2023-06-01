@@ -1,0 +1,60 @@
+--Select subset of columns for analysis and add them to a new table, recategorize crime types within the 'all other' category to assist aggregation
+```sql
+SELECT ucr, record, lower(crime_category) as category, lower(crime_type) as crime_type, begin_date_of_occurrence, end_date_of_occurrence, CAST(begin_time_of_occurrence as time),CAST(end_time_of_occurrence as time), lower(crime_day) AS day_of_week, location, lat,lon
+INTO cpd_data2
+FROM
+cpd_data
+WHERE EXTRACT(year FROM end_date_of_occurrence) in (2017, 2018, 2019, 2020, 2021, 2022);
+```
+--Select all columns and data types in new table to ensure all are correct: 
+SELECT column_name, data_type 
+FROM information_schema.columns
+WHERE table_name = 'cpd_data2';
+
+--Identify NULL values from each column by subtracting column counts from all counts. 
+SELECT COUNT(lon) - COUNT(*) AS lon_null_count,
+COUNT(record) - COUNT(*) AS record_null_count,
+COUNT(begin_date_of_occurrence) - COUNT(*) AS begin_date_of_occurrence_null_count,
+COUNT(end_date_of_occurrence) - COUNT(*) AS end_date_of_occurrence_null_count,
+COUNT(begin_time_of_occurrence) - COUNT(*) AS begin_time_of_occurrence_null_count,
+COUNT(end_time_of_occurrence) - COUNT(*) AS end_time_of_occurrence_null_count,
+COUNT(lat) - COUNT(*) AS lat_null_count,
+COUNT(category) - COUNT(*) AS category_null_count,
+COUNT(new_crime_type) - COUNT(*) AS new_crime_type_null_count,
+COUNT(ucr) - COUNT(*) AS ucr_null_count,
+COUNT(day_of_week) - COUNT(*) AS day_of_week_null_count,
+COUNT(location) - COUNT(*) AS location_null_count
+FROM cpd_data2; 
+
+--Select counts by year of NULL values in rows: latitude, longitude, location, or begin time of occurrence values per previous query
+SELECT EXTRACT(year FROM end_date_of_occurrence), COUNT(CASE WHEN begin_time_of_occurrence IS NULL 
+OR lat IS NULL OR lon IS NULL or location IS NULL THEN record END) as null_count
+FROM cpd_data2
+GROUP BY EXTRACT(year FROM end_date_of_occurrence); 
+
+--Rule out blank values in all text/varchar columns
+SELECT *
+FROM cpd_data2
+WHERE category = '' OR new_crime_type = '' OR ucr = '' OR day_of_week = '' OR location = '';
+
+--Create new table with new crime category column
+CREATE TABLE cpd_data3 (
+	ucr varchar(255), 
+	record integer,
+	category varchar(255),
+	crime_type varchar(255),
+	new_crime_type varchar(255),
+	begin_date_of_occurrence date, 
+	end_date_of_occurrence date,
+	begin_time_of_occurrence time, 
+	end_time_of_occurrence time, 
+	day_of_week varchar(255), 
+	location varchar(255), 
+	lat numeric,
+	lon numeric		
+);
+
+--Select record counts grouped by new crime type and year
+SELECT new_crime_type, EXTRACT(year FROm end_date_of_occurrence) as year, COUNT(record)
+FROM cpd_data3
+GROUP BY new_crime_type, year;
