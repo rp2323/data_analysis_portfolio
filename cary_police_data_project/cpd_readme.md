@@ -14,61 +14,85 @@ The analysis was based on the [Town of Cary Police Incident dataset](https://dat
 * Crime category and type (more or less a sub-category) 
 * Geographical coordinates. 
 * A column devoted to the UCR (uniform crime reporting) code.   
-<sub>*The FBI’s Uniform Crime Reporting Program is an effort to standardize crime reporting across jurisdictions to aid in the statistical analysis of crime nationwide.</sub>    
+<sub>*The FBI’s Uniform Crime Reporting Program is intended to standardize crime reporting across jurisdictions to aid in the statistical analysis of crime nationwide.</sub>    
 
-Prior to data cleaning, I created a new table composed of only the columns pertinent to my analysis, focusing on unique incident identifiers, time series information, categorical attributes, and geographic information. 
+Prior to data cleaning, I created a new table composed of only the columns pertinent to analysis, which was restricted to the three “pre-COVID” years (2017-2019) and three COVID years (2020-2022).   
 
-I created a new table from the raw data which was restricted to the three “pre-COVID” years (2017-2019) and three COVID years (2020-2022). This narrowed set included data for **28,395 unique police incidents**.
+This narrowed set included data for **28,395 unique police incidents**.
 
 ```sql
 /*Select subset of columns for analysis and add them to a new table, recategorize crime types 
 within the 'all other' category to assist aggregation*/
-SELECT ucr, record, lower(crime_category) as category, lower(crime_type) as crime_type, begin_date_of_occurrence, 
-end_date_of_occurrence, CAST(begin_time_of_occurrence as time),CAST(end_time_of_occurrence as time), 
-lower(crime_day) AS day_of_week, location, lat,lon
-INTO cpd_data2
+SELECT
+	ucr
+	,record
+	,lower(crime_category) as category
+	,lower(crime_type) as crime_type
+	,begin_date_of_occurrence 
+	,end_date_of_occurrence
+	,CAST(begin_time_of_occurrence as time)
+	,CAST(end_time_of_occurrence as time) 
+	,lower(crime_day) AS day_of_week
+	,location
+	,lat
+	,lon
+INTO
+	cpd_data2
 FROM
-cpd_data
-WHERE EXTRACT(year FROM end_date_of_occurrence) in (2017, 2018, 2019, 2020, 2021, 2022);
+	cpd_data
+WHERE
+	EXTRACT(year FROM end_date_of_occurrence) in (2017, 2018, 2019, 2020, 2021, 2022);
 ```
 ## Data Cleaning
 After uploading the data table to a local PostgreSQL server, I reviewed for the following potentially problematic data characteristics: null values and missing values. Mixed and invalid data types were addressed when the CSV was initially loaded into Postgres.  
 ```sql
 /*Identify NULL values from each column by subtracting column counts from all counts.*/ 
-SELECT COUNT(lon) - COUNT(*) AS lon_null_count,
-COUNT(record) - COUNT(*) AS record_null_count,
-COUNT(begin_date_of_occurrence) - COUNT(*) AS begin_date_of_occurrence_null_count,
-COUNT(end_date_of_occurrence) - COUNT(*) AS end_date_of_occurrence_null_count,
-COUNT(begin_time_of_occurrence) - COUNT(*) AS begin_time_of_occurrence_null_count,
-COUNT(end_time_of_occurrence) - COUNT(*) AS end_time_of_occurrence_null_count,
-COUNT(lat) - COUNT(*) AS lat_null_count,
-COUNT(category) - COUNT(*) AS category_null_count,
-COUNT(new_crime_type) - COUNT(*) AS new_crime_type_null_count,
-COUNT(ucr) - COUNT(*) AS ucr_null_count,
-COUNT(day_of_week) - COUNT(*) AS day_of_week_null_count,
-COUNT(location) - COUNT(*) AS location_null_count
-FROM cpd_data2;
+SELECT
+	COUNT(lon) - COUNT(*) AS lon_null_count
+	,COUNT(record) - COUNT(*) AS record_null_count
+	,COUNT(begin_date_of_occurrence) - COUNT(*) AS begin_date_of_occurrence_null_count
+	,COUNT(end_date_of_occurrence) - COUNT(*) AS end_date_of_occurrence_null_count
+	,COUNT(begin_time_of_occurrence) - COUNT(*) AS begin_time_of_occurrence_null_count
+	,COUNT(end_time_of_occurrence) - COUNT(*) AS end_time_of_occurrence_null_count
+	,COUNT(lat) - COUNT(*) AS lat_null_count
+	,COUNT(category) - COUNT(*) AS category_null_count
+	,COUNT(new_crime_type) - COUNT(*) AS new_crime_type_null_count
+	,COUNT(ucr) - COUNT(*) AS ucr_null_count
+	,COUNT(day_of_week) - COUNT(*) AS day_of_week_null_count
+	,COUNT(location) - COUNT(*) AS location_null_count
+FROM
+  cpd_data2;
 ```
 ```sql
 /*Select counts by year of NULL values in rows: latitude, longitude, location, 
 or begin time of occurrence values per previous query*/
-SELECT EXTRACT(year FROM end_date_of_occurrence), COUNT(CASE WHEN begin_time_of_occurrence IS NULL 
-OR lat IS NULL OR lon IS NULL or location IS NULL THEN record END) as null_count
-FROM cpd_data2
-GROUP BY EXTRACT(year FROM end_date_of_occurrence); 
+SELECT 
+	,EXTRACT(year FROM end_date_of_occurrence), 
+	,COUNT(CASE WHEN begin_time_of_occurrence IS NULL 
+	,OR lat IS NULL OR lon IS NULL or location IS NULL THEN record END) as null_count
+FROM
+	cpd_data2
+GROUP BY
+	EXTRACT(year FROM end_date_of_occurrence)
 ```
 
 ```sql
 /*Rule out blank values in all text/varchar columns*/
-SELECT *
-FROM cpd_data2
-WHERE category = '' OR new_crime_type = '' OR ucr = '' OR day_of_week = 
-'' OR location = '';
+SELECT
+	*
+FROM
+	cpd_data2
+WHERE
+	category = '' 
+	OR new_crime_type = '' 
+	OR ucr = '' 
+	OR day_of_week = '' 
+	OR location = '';
 ```
 
-I discovered 147 rows with null values for the geographic variables latitude, longitiude, and location and one row where the begin time of occurrence was null. Because other valuable categorical data was still present for these rows, I retained them but noted that they would need to be excluded for any future geographical analysis. No columns had missing values. 
+I discovered **147 rows with null values for the geographic variables latitude, longitiude, and location and one row where the begin time of occurrence was null**. Because other valuable categorical data was still present for these rows, I retained them but noted that they would need to be excluded for any future geographical analysis. No columns had missing values. 
 
-Once null and blank values were addressed, I reviewed each column for duplicate values, specifically record numbers, which I’d established as the unique IDs for each incident.  
+Once null and blank values were addressed, I reviewed the record numbers column for duplicate values, which I’d established as the ID column for each unique incident.  
 
 # Analysis
 ## What Is the Overall Trend from the Past Six Years? 
