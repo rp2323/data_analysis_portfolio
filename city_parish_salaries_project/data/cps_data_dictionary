@@ -1,0 +1,39 @@
+YEAR - *description not provided ; data type:Number
+LAST NAME - *description not provided ; data type:Plain Text
+FIRST NAME - *description not provided ; data type:Plain Text
+MIDDLE INIT - *description not provided ; data type:Plain Text
+DEPARTMENT NUMBER - *description not provided ; data type:Number
+DEPARTMENT NAME - *description not provided ; data type:Plain Text
+PAY LOCATION CODE - *description not provided ; data type:Number
+PAY LOCATION DESCRIPTION - Corresponds to the division or location where the employee works; data type:Plain Text
+JOB CODE - *description not provided ; data type:Number
+JOB TITLE - *description not provided ; data type:Plain Text
+CURRENT HIRE DATE - Most current date employee hired (Does not include broken service with the City-Parish); data type:Date & Time
+EMPLOYMENT END DATE - End of service date, the employee may have retired, resigned or was terminated; data type:Date & Time
+EMPLOYMENT STATUS - Employee's status with the City-Parish. A=Active; I=Inactive; data type:Plain Text
+BASE PAY - Annual salary of employee, not including any additional earning allowances; data type:Number
+GROSS PAY - Base pay plus overtime pay plus any extra earnings; data type:Number
+TOTAL OT HOURS - Total number of overtime hours worked. 2018 OT hours were not captured when we migrated to the new payroll system. Moving forward this data will be available.; data type:Number
+TOTAL OT PAY - Overtime pay; data type:Number
+SEVERANCE PAY - Severance pay; data type:Number
+SHIFT DIFFERENTIAL PAY - Shift differential pay; data type:Number
+PAY ADJUSTMENTS - Any pay adjustments received throughout the year; data type:Number
+CAR ALLOWANCE - Car allowance; data type:Number
+MEAL ALLOWANCE - Meal allowance for EMS employees; data type:Number
+STATE SUPPLEMENTAL JP - State supplemental pay for Justice of the Peace; data type:Number
+EDUCATION PAY - Educational pay for employees receiving State Supplemental Pay, or for Municipal Fire and Police employees; data type:Number
+TRANSFER COMPENSATION - A 56 hour fire employee who reports to duty and is transferred to another fire station; data type:Number
+SPECIAL ASSIGNMENT - Special assignment pay; data type:Number
+ENGINEER LICENSE - Post license experience allowance for licensed professional engineers; data type:Number
+POLICE SUIT ALLOWANCE - Police suit allowance for detectives; data type:Number
+WORKERS COMP - Workers compensation; data type:Number
+EMPLOYEE REIMBURSEMENT - Any employee reimbursements received throughout the year; data type:Number
+STATE 2 PERCENT - Statute requiring Fire employees to receive a raise of at least 2% each year after completion of 3 years of continuous service in the Fire Department. Effective for 20 years or until the employee's 23rd year of service.; data type:Number
+PRISON ASSIGNMENT - Employees assigned to work at the Parish Prison; data type:Number
+HAZARDOUS PAY - Hazardous pay for sworn police employees, or Entomologist performing aerial spraying; data type:Number
+EMPLOYEE REFUND - Refunds paid to employee; data type:Number
+LONGEVITY - Percentage pay based on years of service; data type:Number
+COMMANDER PAY - Job assignments designated by the Police Chief; data type:Number
+FIELD TRAINING PAY - Municipal police employees performing training duties; data type:Number
+AVIATION PAY - Sworn police employees assigned as Police Pilots; data type:Number
+UNIQUEID - Sworn police employees assigned as Police Pilots; data type:Plain Text
