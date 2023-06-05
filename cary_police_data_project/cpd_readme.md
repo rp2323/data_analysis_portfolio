@@ -96,28 +96,33 @@ Once null and blank values were addressed, I reviewed the record numbers column 
 
 # Analysis
 ## What Is the Overall Trend from the Past Six Years? 
-Overall recorded police incidents saw a gradual decline between from 2017 to 2022, with a **decline of -21%**. 
+**Overall recorded police incidents saw a gradual decline between from 2017 to 2022, with a decline of -21%**. 
 
 ![image4](https://github.com/rp2323/cary_nc_crime_data/assets/126728422/53676e40-c71a-4213-be97-caf04173b76c)
+<sub>*graph created in Excel</sub>  
 
 ![image5](https://github.com/rp2323/cary_nc_crime_data/assets/126728422/9081bfb0-b066-49c9-9e44-506214283dbf)
+<sub>*graph created in Excel</sub>  
 
 ## What Types of Incidents Are Most Commonly Reported?
-When incidents were broken down by category, **the catchall category “all other” accounted for 58-62%** of police incidents and while **larceny accounted for 26-29%**: 
+When broken down by category, **the incident category “all other” accounted for 58-62%** of police incidents while **larceny accounted for 26-29%**: 
 
 ![image2](https://github.com/rp2323/cary_nc_crime_data/assets/126728422/b0f4c41d-a704-473f-baf4-3ed7561b2ed2)
+<sub>*graph created in Excel</sub>  
 
-While contributing fairly minimally to the overall number, incidents involving motor vehicle theft over saw the only notable change over the six-year period, **increasing almost 300%** over that time: 
+**Incidents involving motor vehicle theft increased almost 300%** over the six-year period: 
 
 ![motor_v_theft_by_year](https://github.com/rp2323/cary_nc_crime_data/assets/126728422/68ddff54-ea47-4171-9987-25c806bcff81)
+<sub>*graph created in Excel</sub>  
 
 Otherwise, the trends amongst the major crime categories remained stable. 
 
 ## ‘All other’ Incidents
-Identifying trends among the sub-types within the 'all other' category required some further standardization of the data. The distinct UCR codes helped differentiate some of the incidents contained within the category. 
+Identifying trends among the sub-types within the 'all other' category required further standardization/cleaning of the data. 
 
-For example: 
+The distinct UCR codes helped differentiate some of the incidents contained within the category. 
 
+Example: 
 * 13B - *simple assault*
 * 13C - *intimidation*
 
@@ -127,7 +132,7 @@ However, some incidents with the same UCR (26A) code were logged with distinct c
 * *fraud - obtaining property by false pretense*
 * *fraud - pharmaceutical fraud*
 
-To help facilitate the analysis, I standardized the crime type entries so that similar incident types would be grouped together using XLOOKUP in Excel. For the example above, the four crime types were standardized as simply ‘fraud.’ Once the recategorization was complete I uploaded the cpd_data2 table data to Postgres as 'cpd_data3' with an added column of standardized incident types.
+To facilitate the analysis, I used XLOOKUP in Excel to standardize the crime type entries so that similar incident types would be grouped together. (For the example above, the four crime types were standardized as simply ‘fraud.’) Once the recategorization was complete I uploaded the cpd_data2 table data to Postgres as 'cpd_data3' with an added column of standardized incident types.
 
 Those adjustments helped draw insights from the 'all other' category, with fraud consistently composing the majority of the category's incidents, followed by destruction/damage/vandalism of property.  
 
