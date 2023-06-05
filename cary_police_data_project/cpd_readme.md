@@ -5,7 +5,7 @@ As a Cary resident, I was interested in answering the following questions:
 
 * [What is the overall trend over the past six years (three pre-COVID + three during-COVID)?](#what-is-the-overall-trend-from-the-past-six-years) 
 * [What types of police incidents are most commonly reported in Cary?](#what-types-of-incidents-are-most-commonly-reported)
-* [How do the top incident types compare in frequency?](#how-do-the-top-incident-types-compare-in-frequency)
+* [How do the top incident types compare in frequency?](#how-do-the-top-incidents-types-compare-in-frequency)
 
 ## About the Data 
 The analysis was based on the [Town of Cary Police Incident dataset](https://data.townofcary.org/explore/dataset/cpd-incidents/export/?disjunctive.crime_category&disjunctive.crime_type&disjunctive.crimeday&disjunctive.district&disjunctive.offensecategory&disjunctive.violentproperty&disjunctive.total_incidents&disjunctive.year&dataChart=eyJxdWVyaWVzIjpbeyJjaGFydHMiOlt7InR5cGUiOiJjb2x1bW4iLCJmdW5jIjoiQ09VTlQiLCJ5QXhpcyI6InRvdGFsX2luY2lkZW50cyIsImNvbG9yIjoiIzJCM0Y1NiIsInNjaWVudGlmaWNEaXNwbGF5Ijp0cnVlfV0sInhBeGlzIjoieWVhciIsIm1heHBvaW50cyI6IiIsInRpbWVzY2FsZSI6IiIsInNvcnQiOiIiLCJzZXJpZXNCcmVha2Rvd25UaW1lc2NhbGUiOiIiLCJjb25maWciOnsiZGF0YXNldCI6ImNwZC1pbmNpZGVudHMiLCJvcHRpb25zIjp7ImRpc2p1bmN0aXZlLmNyaW1lX2NhdGVnb3J5Ijp0cnVlLCJkaXNqdW5jdGl2ZS5jcmltZV90eXBlIjp0cnVlLCJkaXNqdW5jdGl2ZS5jcmltZWRheSI6dHJ1ZSwiZGlzanVuY3RpdmUuZGlzdHJpY3QiOnRydWUsImRpc2p1bmN0aXZlLm9mZmVuc2VjYXRlZ29yeSI6dHJ1ZSwiZGlzanVuY3RpdmUudmlvbGVudHByb3BlcnR5Ijp0cnVlLCJkaXNqdW5jdGl2ZS50b3RhbF9pbmNpZGVudHMiOnRydWUsImRpc2p1bmN0aXZlLnllYXIiOnRydWV9fX1dLCJ0aW1lc2NhbGUiOiIiLCJkaXNwbGF5TGVnZW5kIjp0cnVlLCJhbGlnbk1vbnRoIjp0cnVlfQ%3D%3D). Some of the key attributes that the data encompasses are: 
