@@ -5,7 +5,7 @@ As a Cary resident, I was interested in answering the following questions:
 
 * [What is the overall trend over the past six years (three pre-COVID + three during-COVID)?](#what-is-the-overall-trend-from-the-past-six-years) 
 * [What types of police incidents are most commonly reported in Cary?](#what-types-of-incidents-are-most-commonly-reported)
-* [How do the top incident types compare in frequency?](#how-do-the-top-incidents-types-compare-in-frequency)
+* [How do the top incident types compare in frequency?](#how-do-the-top-incidents-types-compare)
 
 ## About the Data 
 The analysis was based on the [Town of Cary Police Incident dataset](https://data.townofcary.org/explore/dataset/cpd-incidents/export/?disjunctive.crime_category&disjunctive.crime_type&disjunctive.crimeday&disjunctive.district&disjunctive.offensecategory&disjunctive.violentproperty&disjunctive.total_incidents&disjunctive.year&dataChart=eyJxdWVyaWVzIjpbeyJjaGFydHMiOlt7InR5cGUiOiJjb2x1bW4iLCJmdW5jIjoiQ09VTlQiLCJ5QXhpcyI6InRvdGFsX2luY2lkZW50cyIsImNvbG9yIjoiIzJCM0Y1NiIsInNjaWVudGlmaWNEaXNwbGF5Ijp0cnVlfV0sInhBeGlzIjoieWVhciIsIm1heHBvaW50cyI6IiIsInRpbWVzY2FsZSI6IiIsInNvcnQiOiIiLCJzZXJpZXNCcmVha2Rvd25UaW1lc2NhbGUiOiIiLCJjb25maWciOnsiZGF0YXNldCI6ImNwZC1pbmNpZGVudHMiLCJvcHRpb25zIjp7ImRpc2p1bmN0aXZlLmNyaW1lX2NhdGVnb3J5Ijp0cnVlLCJkaXNqdW5jdGl2ZS5jcmltZV90eXBlIjp0cnVlLCJkaXNqdW5jdGl2ZS5jcmltZWRheSI6dHJ1ZSwiZGlzanVuY3RpdmUuZGlzdHJpY3QiOnRydWUsImRpc2p1bmN0aXZlLm9mZmVuc2VjYXRlZ29yeSI6dHJ1ZSwiZGlzanVuY3RpdmUudmlvbGVudHByb3BlcnR5Ijp0cnVlLCJkaXNqdW5jdGl2ZS50b3RhbF9pbmNpZGVudHMiOnRydWUsImRpc2p1bmN0aXZlLnllYXIiOnRydWV9fX1dLCJ0aW1lc2NhbGUiOiIiLCJkaXNwbGF5TGVnZW5kIjp0cnVlLCJhbGlnbk1vbnRoIjp0cnVlfQ%3D%3D). Some of the key attributes that the data encompasses are: 
@@ -117,7 +117,7 @@ When broken down by category, **the incident category “all other” accounted 
 
 Otherwise, the trends amongst the major crime categories remained stable. 
 
-## ‘All other’ Incidents
+## What Crime Types Composed ‘All other’ Incidents?
 Identifying trends among the sub-types within the 'all other' category required further standardization/cleaning of the data. 
 
 The distinct UCR codes helped differentiate some of the incidents contained within the category. 
@@ -150,5 +150,10 @@ GROUP BY
 
 ![all_other_heatmap](https://github.com/rp2323/cary_nc_crime_data/assets/126728422/5ecf0bc1-a2b8-488b-b9f5-900ef6afe819)
 
-## How Do the top Incidents Types Compare in Frequency?
+## How Do the Top Incidents Types Compare?
+Once I was able to establish that different types of fraud were the most common 'all other' incident type, I was curious how they compared with the most common non-'all other' type, larceny. *While larceny maintained a steady percentage of 26-29%, fraud incidents accounted for 11-15%, or roughly half of the lareceny incidents.*
+
+![fraud_vs_larceny](https://github.com/rp2323/data_analysis_portfolio/assets/126728422/0987d3b4-857f-4f7b-93c2-d0feb92fe559)
+
+# Findings
 
