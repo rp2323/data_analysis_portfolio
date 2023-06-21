@@ -22,7 +22,7 @@ The dataset encompasses salary for all departments of the East Baton Rouge City-
 ## Data Cleaning
 After uploading hte dataset to a local PostgreSQL server, I reviewed for problematic data characteristics: 
 
-* Obtained NULL counts for all columns
+* Obtained NULL counts for all columns - the only columns with considerable NULL value counts were the employment end date and middle initial, neither of which were problematic.
 ```sql
 /*Obtain null counts for all columns*/
 SELECT 'last_name_null_count', COUNT(CASE WHEN last_name IS NULL THEN uniqueid END) FROM cps_data
@@ -102,8 +102,8 @@ UNION ALL
 SELECT 'uniqueid_null_count', COUNT(CASE WHEN uniqueid IS NULL THEN uniqueid END) FROM cps_data
 ```
 
-* Ruled out active employees with populated end of employment dates/inactive employees without termination dates (19 rows were discovered and removed from the dataset prior to analysis
-
+* Ruled out active employees with populated 'end of employment' dates/inactive employees without termination dates (19 rows were discovered and removed from the dataset prior to analysis - 
+discovered three employees with termination dates prior to their hired dates and removed.
 ```sql
 /*Rule out faulty begin date/end date entries*/
 SELECT 
@@ -184,4 +184,51 @@ SELECT
 FROM
 	cps_data;
 ```
+![emp_with_earlier_term_dates](https://github.com/rp2323/data_analysis_portfolio/assets/126728422/507a04dc-8a89-4629-bcaf-2ceaea7e9a2c)
 * Ensured department names and codes are consistent
+```sql
+/*Select counts of unique deparment names/numbers and job codes/titles to ensure they correspond correctly*/
+SELECT 
+	COUNT (DISTINCT department_number) as count_dept_num
+	,COUNT (DISTINCT department_name) as count_dept_name
+	,COUNT (DISTINCT job_code) as count_job_code
+	,COUNT (DISTINCT job_title) as count_job_title
+FROM 
+	cps_data;
+```
+
+## Analysis
+### What Departments Lead in Average Base Pay?
+
+![base_pay_dept](https://github.com/rp2323/data_analysis_portfolio/assets/126728422/d0d247c1-e4e0-445b-9eae-078619b33d4b)
+
+### What Departments Lead in Average Gross Pay?
+
+
+![gross_pay_dept](https://github.com/rp2323/data_analysis_portfolio/assets/126728422/da39f155-5872-442f-9647-faa433001fb2)
+
+### What Departments Lead in Total Overtime Hours?
+
+![total_ot_hrs_dept](https://github.com/rp2323/data_analysis_portfolio/assets/126728422/bb9ff147-9cd8-4f28-ac5d-cc77c042dd55)
+
+
+### What Departments Lead in Total Employee Headcount?
+
+![employee_count_dept](https://github.com/rp2323/data_analysis_portfolio/assets/126728422/c1da7fb9-5861-40cd-93ad-0ec505b7fa56)
+
+### What Positions Pay the Highest Average Base Pay?
+
+![base_pay_position](https://github.com/rp2323/data_analysis_portfolio/assets/126728422/908fb351-de54-4d7f-88ec-a8d5e8ec27b3)
+
+### What Positions Pay the Highest Average Gross Pay?
+
+![gross_pay_position](https://github.com/rp2323/data_analysis_portfolio/assets/126728422/f8dd7c5a-bc8f-46e3-b403-02ade6b0e03d)
+
+### How Have Base Pay And Gross Pay Trended Over the Past Five Years?
+
+![bp_vs_gp_allyrs_2](https://github.com/rp2323/data_analysis_portfolio/assets/126728422/edd51437-53e3-4648-9f3c-8c173843ced8)
+
+
+
+
+
