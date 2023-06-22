@@ -9,6 +9,8 @@ This project is intended to address the following key questions using the [City-
 * What positions pay the highest average gross pay?
 * How have base pay and gross pay trended over the past five years?
 
+I completed initial data manimpulation in PostgreSQL and then created [Tableau dashboard](https://public.tableau.com/views/baton_rouge_completed_dashboard_1/Dashboard1?:language=en-US&:display_count=n&:origin=viz_share_link) for stakeholders to review. 
+
 ## Summary of Findings
 1. The Council Budget Office has the highest average salary ($62k) when not accounting for number of employees. When limited to departments with at least 10 employees, Information Services has the highest average base pay ($55k). When limited to at least 100 employees, the fire department has the highest average base pay ($52k).
 2. The Council Budget Office ($64k) and fire department ($63k) also lead for average gross pay.
