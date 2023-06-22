@@ -23,12 +23,19 @@ The dataset encompasses salary for all departments of the East Baton Rouge City-
 After uploading hte dataset to a local PostgreSQL server, I reviewed for problematic data characteristics: 
 
 * Obtained NULL counts for all columns - the only columns with considerable NULL value counts were the employment end date and middle initial, neither of which were problematic.
-```sql
+<details>
+<summary>
+
+```sql 
 /*Obtain null counts for all columns*/
 SELECT 'last_name_null_count', COUNT(CASE WHEN last_name IS NULL THEN uniqueid END) FROM cps_data
 UNION ALL
 SELECT 'first_name_null_count', COUNT(CASE WHEN first_name IS NULL THEN uniqueid END) FROM cps_data
 UNION ALL
+```
+</summary>
+
+```sql
 SELECT 'middle_init_null_count', COUNT(CASE WHEN middle_init IS NULL THEN uniqueid END) FROM cps_data
 UNION ALL
 SELECT 'department_number_null_count', COUNT(CASE WHEN department_number IS NULL THEN uniqueid END) FROM cps_data
@@ -101,9 +108,16 @@ SELECT 'aviation_pay_null_count', COUNT(CASE WHEN aviation_pay IS NULL THEN uniq
 UNION ALL
 SELECT 'uniqueid_null_count', COUNT(CASE WHEN uniqueid IS NULL THEN uniqueid END) FROM cps_data
 ```
+</details>
 
-* Ruled out active employees with populated 'end of employment' dates/inactive employees without termination dates (19 rows were discovered and removed from the dataset prior to analysis - 
-discovered three employees with termination dates prior to their hired dates and removed.
+* Ruled out active employees with populated 'end of employment' dates/inactive employees without termination dates (seven employees were discovered, leading to 19 total rows removed from the dataset prior to analysis).
+
+![emp_with_earlier_term_dates](https://github.com/rp2323/data_analysis_portfolio/assets/126728422/9123ba1b-45ad-4b74-a581-a7204a6732ad)
+![inactive_no_term_date](https://github.com/rp2323/data_analysis_portfolio/assets/126728422/3f25da12-2dee-475a-824d-818fd193bbac)
+
+<details>
+<summary>
+	
 ```sql
 /*Rule out faulty begin date/end date entries*/
 SELECT 
@@ -112,7 +126,10 @@ FROM
 	cps_data
 WHERE 
 	employment_end_date - current_hire_date < 0;
+```
+</summary>
 
+ ```sql 
 /*Identify instances where employees are inactive but termination dates weren't supplied*/
 with t1 AS (SELECT 
 	uniqueid
@@ -162,6 +179,7 @@ WHERE
 * Ruled out mismatched job title/code combinations
 
 ```sql
+</details>
 /*Find instances where job titles match but job codes do not*/
 SELECT 
 	DISTINCT(cps.job_title)
@@ -184,7 +202,8 @@ SELECT
 FROM
 	cps_data;
 ```
-![emp_with_earlier_term_dates](https://github.com/rp2323/data_analysis_portfolio/assets/126728422/507a04dc-8a89-4629-bcaf-2ceaea7e9a2c)
+</details>
+
 * Ensured department names and codes are consistent
 ```sql
 /*Select counts of unique deparment names/numbers and job codes/titles to ensure they correspond correctly*/
@@ -199,6 +218,7 @@ FROM
 
 ## Analysis
 ### What Departments Lead in Average Base Pay?
+
 
 ![base_pay_dept](https://github.com/rp2323/data_analysis_portfolio/assets/126728422/d0d247c1-e4e0-445b-9eae-078619b33d4b)
 
