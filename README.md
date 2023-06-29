@@ -2,7 +2,7 @@
 This repository will include summary writeups for all my data analysis projects as well as the code files. The writeups will tend to emphasize the technical aspects of the project. I'll link out to Tableau dashboards and Google slides in the writeups to showcase deliverables intended for non-technical audiences. 
 
 ## Recent projects 
-* [Cary Police Incident Data Analysis](https://github.com/rp2323/data_analysis_portfolio/tree/main/cary_police_data_project)
+* [Cary, NC Police Incident Data Analysis](https://github.com/rp2323/data_analysis_portfolio/tree/main/cary_police_data_project)
 * [East Baton Rouge City-Parish Employee Salary Data Analysis](https://github.com/rp2323/data_analysis_portfolio/tree/main/city_parish_salaries_project)
 
 [LinkedIn Profile](http://www.linkedin.com/in/raphael-peterson-03212073)
