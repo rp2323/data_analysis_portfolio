@@ -1,0 +1,357 @@
+/*Obtain null counts for all columns*/
+SELECT 'last_name_null_count', COUNT(CASE WHEN last_name IS NULL THEN uniqueid END) FROM cps_data
+UNION ALL
+SELECT 'first_name_null_count', COUNT(CASE WHEN first_name IS NULL THEN uniqueid END) FROM cps_data
+UNION ALL
+SELECT 'middle_init_null_count', COUNT(CASE WHEN middle_init IS NULL THEN uniqueid END) FROM cps_data
+UNION ALL
+SELECT 'department_number_null_count', COUNT(CASE WHEN department_number IS NULL THEN uniqueid END) FROM cps_data
+UNION ALL
+SELECT 'department_name_null_count', COUNT(CASE WHEN department_name IS NULL THEN uniqueid END) FROM cps_data
+UNION ALL
+SELECT 'pay_location_code_null_count', COUNT(CASE WHEN pay_location_code IS NULL THEN uniqueid END) FROM cps_data
+UNION ALL
+SELECT 'pay_location_description_null_count', COUNT(CASE WHEN pay_location_description IS NULL THEN uniqueid END) FROM cps_data
+UNION ALL
+SELECT 'job_code_null_count', COUNT(CASE WHEN job_code IS NULL THEN uniqueid END) FROM cps_data
+UNION ALL
+SELECT 'job_title_null_count', COUNT(CASE WHEN job_title IS NULL THEN uniqueid END) FROM cps_data
+UNION ALL
+SELECT 'current_hire_date_null_count', COUNT(CASE WHEN current_hire_date IS NULL THEN uniqueid END) FROM cps_data
+UNION ALL
+SELECT 'employment_end_date_null_count', COUNT(CASE WHEN employment_end_date IS NULL THEN uniqueid END) FROM cps_data
+UNION ALL
+SELECT 'employment_status_null_count', COUNT(CASE WHEN employment_status IS NULL THEN uniqueid END) FROM cps_data
+UNION ALL
+SELECT 'base_pay_null_count', COUNT(CASE WHEN base_pay IS NULL THEN uniqueid END) FROM cps_data
+UNION ALL
+SELECT 'gross_pay_null_count', COUNT(CASE WHEN gross_pay IS NULL THEN uniqueid END) FROM cps_data
+UNION ALL
+SELECT 'total_ot_hours_null_count', COUNT(CASE WHEN total_ot_hours IS NULL THEN uniqueid END) FROM cps_data
+UNION ALL
+SELECT 'total_ot_pay_null_count', COUNT(CASE WHEN total_ot_pay IS NULL THEN uniqueid END) FROM cps_data
+UNION ALL
+SELECT 'severance_pay_null_count', COUNT(CASE WHEN severance_pay IS NULL THEN uniqueid END) FROM cps_data
+UNION ALL
+SELECT 'shift_differential_pay_null_count', COUNT(CASE WHEN shift_differential_pay IS NULL THEN uniqueid END) FROM cps_data
+UNION ALL
+SELECT 'pay_adjustments_null_count', COUNT(CASE WHEN pay_adjustments IS NULL THEN uniqueid END) FROM cps_data
+UNION ALL
+SELECT 'car_allowance_null_count', COUNT(CASE WHEN car_allowance IS NULL THEN uniqueid END) FROM cps_data
+UNION ALL
+SELECT 'meal_allowance_null_count', COUNT(CASE WHEN meal_allowance IS NULL THEN uniqueid END) FROM cps_data
+UNION ALL
+SELECT 'state_supplemental_jp_null_count', COUNT(CASE WHEN state_supplemental_jp IS NULL THEN uniqueid END) FROM cps_data
+UNION ALL
+SELECT 'education_pay_null_count', COUNT(CASE WHEN education_pay IS NULL THEN uniqueid END) FROM cps_data
+UNION ALL
+SELECT 'transfer_compensation_null_count', COUNT(CASE WHEN transfer_compensation IS NULL THEN uniqueid END) FROM cps_data
+UNION ALL
+SELECT 'special_assignment_null_count', COUNT(CASE WHEN special_assignment IS NULL THEN uniqueid END) FROM cps_data
+UNION ALL
+SELECT 'engineer_license_null_count', COUNT(CASE WHEN engineer_license IS NULL THEN uniqueid END) FROM cps_data
+UNION ALL
+SELECT 'police_suit_allowance_null_count', COUNT(CASE WHEN police_suit_allowance IS NULL THEN uniqueid END) FROM cps_data
+UNION ALL
+SELECT 'workers_comp_null_count', COUNT(CASE WHEN workers_comp IS NULL THEN uniqueid END) FROM cps_data
+UNION ALL
+SELECT 'employee_reimbursement_null_count', COUNT(CASE WHEN employee_reimbursement IS NULL THEN uniqueid END) FROM cps_data
+UNION ALL
+SELECT 'state_2_percent_null_count', COUNT(CASE WHEN state_2_percent IS NULL THEN uniqueid END) FROM cps_data
+UNION ALL
+SELECT 'prison_assignment_null_count', COUNT(CASE WHEN prison_assignment IS NULL THEN uniqueid END) FROM cps_data
+UNION ALL
+SELECT 'hazardous_pay_null_count', COUNT(CASE WHEN hazardous_pay IS NULL THEN uniqueid END) FROM cps_data
+UNION ALL
+SELECT 'employee_refund_null_count', COUNT(CASE WHEN employee_refund IS NULL THEN uniqueid END) FROM cps_data
+UNION ALL
+SELECT 'longevity_null_count', COUNT(CASE WHEN longevity IS NULL THEN uniqueid END) FROM cps_data
+UNION ALL
+SELECT 'commander_pay_null_count', COUNT(CASE WHEN commander_pay IS NULL THEN uniqueid END) FROM cps_data
+UNION ALL
+SELECT 'field_training_pay_null_count', COUNT(CASE WHEN field_training_pay IS NULL THEN uniqueid END) FROM cps_data
+UNION ALL
+SELECT 'aviation_pay_null_count', COUNT(CASE WHEN aviation_pay IS NULL THEN uniqueid END) FROM cps_data
+UNION ALL
+SELECT 'uniqueid_null_count', COUNT(CASE WHEN uniqueid IS NULL THEN uniqueid END) FROM cps_data
+
+/*Rule out faulty begin date/end date entries*/
+SELECT 
+	*
+FROM 
+	cps_data
+WHERE 
+	employment_end_date - current_hire_date < 0;
+
+/*Identify instances where employees are inactive but termination dates weren't supplied*/
+with t1 AS (SELECT 
+	uniqueid
+	,year
+	,current_hire_date as hire_date
+	,employment_end_date
+	,employment_status
+	,DENSE_RANK() OVER(PARTITION BY uniqueid ORDER BY year) as years_worked
+	,job_title
+	,department_name
+	,base_pay
+	,gross_pay
+FROM
+	cps_data)
+	
+SELECT 
+	* 
+FROM 
+	t1
+WHERE
+	employment_end_date IS NULL 
+	AND employment_status = 'I';
+
+/*Identify instances where employee was active but employment end date was entered*/
+with t1 AS (SELECT 
+	uniqueid
+	,year
+	,current_hire_date as hire_date
+	,employment_end_date
+	,employment_status
+	,DENSE_RANK() OVER(PARTITION BY uniqueid ORDER BY year) as years_worked
+	,job_title
+	,department_name
+	,base_pay
+	,gross_pay
+FROM
+	cps_data)
+	
+SELECT 
+	* 
+FROM 
+	t1
+WHERE
+	employment_end_date IS NOT NULL 
+	AND employment_status = 'A';
+
+/*Find instances where job titles match but job codes do not*/
+SELECT 
+	DISTINCT(cps.job_title)
+	,cps.job_code
+FROM 
+	cps_data cps JOIN 
+	cps_data cps1 ON cps.job_title = cps1.job_title
+WHERE cps.job_code != cps1.job_code;
+
+/*Obtain counts of employees with mismatched job_codes and titles*/
+SELECT
+	COUNT(
+		CASE WHEN job_code = 1474 THEN uniqueid END) as crime_stat1
+	,COUNT(
+		CASE WHEN job_code = 1484 THEN uniqueid END) as crime_stat2
+	,COUNT(
+		CASE WHEN job_code = 5227 THEN uniqueid END) as prog_coordinator1
+	,COUNT(
+		CASE WHEN job_code = 6040 THEN uniqueid END) as prog_coordinator2
+FROM
+	cps_data;
+
+/*Select counts of unique deparment names/numbers and job codes/titles to ensure they correspond correctly*/
+SELECT 
+	COUNT (DISTINCT department_number) as count_dept_num
+	,COUNT (DISTINCT department_name) as count_dept_name
+	,COUNT (DISTINCT job_code) as count_job_code
+	,COUNT (DISTINCT job_title) as count_job_title
+FROM 
+	cps_data;
+
+/*Obtain maximum,minimum, average, and standard deviations for all quantitative variables*/
+SELECT 'base_pay MAX/MIN/AVG/STD DEV:',MAX(base_pay), MIN(base_pay), ROUND(AVG(base_pay),2), ROUND(STDDEV(base_pay),2) from cps_data
+	UNION ALL
+SELECT 'gross_pay MAX/MIN/AVG/STD DEV:',MAX(gross_pay), MIN(gross_pay), ROUND(AVG(gross_pay),2), ROUND(STDDEV(gross_pay),2) from cps_data
+	UNION ALL
+SELECT 'total_ot_hours MAX/MIN/AVG/STD DEV:',MAX(total_ot_hours), MIN(total_ot_hours), ROUND(AVG(total_ot_hours),2), ROUND(STDDEV(total_ot_hours),2) from cps_data
+	UNION ALL
+SELECT 'total_ot_pay MAX/MIN/AVG/STD DEV:',MAX(total_ot_pay), MIN(total_ot_pay), ROUND(AVG(total_ot_pay),2), ROUND(STDDEV(total_ot_pay),2) from cps_data
+	UNION ALL
+SELECT 'severance_pay MAX/MIN/AVG/STD DEV:',MAX(severance_pay), MIN(severance_pay), ROUND(AVG(severance_pay),2), ROUND(STDDEV(severance_pay),2) from cps_data
+	UNION ALL
+SELECT 'shift_differential_pay MAX/MIN/AVG/STD DEV:',MAX(shift_differential_pay), MIN(shift_differential_pay), ROUND(AVG(shift_differential_pay),2), ROUND(STDDEV(shift_differential_pay),2) from cps_data
+	UNION ALL
+SELECT 'pay_adjustments MAX/MIN/AVG/STD DEV:',MAX(pay_adjustments), MIN(pay_adjustments), ROUND(AVG(pay_adjustments),2), ROUND(STDDEV(pay_adjustments),2) from cps_data
+	UNION ALL
+SELECT 'car_allowance MAX/MIN/AVG/STD DEV:',MAX(car_allowance), MIN(car_allowance), ROUND(AVG(car_allowance),2), ROUND(STDDEV(car_allowance),2) from cps_data
+	UNION ALL
+SELECT 'meal_allowance MAX/MIN/AVG/STD DEV:',MAX(meal_allowance), MIN(meal_allowance), ROUND(AVG(meal_allowance),2), ROUND(STDDEV(meal_allowance),2) from cps_data
+	UNION ALL
+SELECT 'state_supplemental_jp MAX/MIN/AVG/STD DEV:',MAX(state_supplemental_jp), MIN(state_supplemental_jp), ROUND(AVG(state_supplemental_jp),2), ROUND(STDDEV(state_supplemental_jp),2) from cps_data
+	UNION ALL
+SELECT 'education_pay MAX/MIN/AVG/STD DEV:',MAX(education_pay), MIN(education_pay), ROUND(AVG(education_pay),2), ROUND(STDDEV(education_pay),2) from cps_data
+	UNION ALL
+SELECT 'transfer_compensation MAX/MIN/AVG/STD DEV:',MAX(transfer_compensation), MIN(transfer_compensation), ROUND(AVG(transfer_compensation),2), ROUND(STDDEV(transfer_compensation),2) from cps_data
+	UNION ALL
+SELECT 'special_assignment MAX/MIN/AVG/STD DEV:',MAX(special_assignment), MIN(special_assignment), ROUND(AVG(special_assignment),2), ROUND(STDDEV(special_assignment),2) from cps_data
+	UNION ALL
+SELECT 'engineer_license MAX/MIN/AVG/STD DEV:',MAX(engineer_license), MIN(engineer_license), ROUND(AVG(engineer_license),2), ROUND(STDDEV(engineer_license),2) from cps_data
+	UNION ALL
+SELECT 'police_suit_allowance MAX/MIN/AVG/STD DEV:',MAX(police_suit_allowance), MIN(police_suit_allowance), ROUND(AVG(police_suit_allowance),2), ROUND(STDDEV(police_suit_allowance),2) from cps_data
+	UNION ALL
+SELECT 'workers_comp MAX/MIN/AVG/STD DEV:',MAX(workers_comp), MIN(workers_comp), ROUND(AVG(workers_comp),2), ROUND(STDDEV(workers_comp),2) from cps_data
+	UNION ALL
+SELECT 'employee_reimbursement MAX/MIN/AVG/STD DEV:',MAX(employee_reimbursement), MIN(employee_reimbursement), ROUND(AVG(employee_reimbursement),2), ROUND(STDDEV(employee_reimbursement),2) from cps_data
+	UNION ALL
+SELECT 'state_2_percent MAX/MIN/AVG/STD DEV:',MAX(state_2_percent), MIN(state_2_percent), ROUND(AVG(state_2_percent),2), ROUND(STDDEV(state_2_percent),2) from cps_data
+	UNION ALL
+SELECT 'prison_assignment MAX/MIN/AVG/STD DEV:',MAX(prison_assignment), MIN(prison_assignment), ROUND(AVG(prison_assignment),2), ROUND(STDDEV(prison_assignment),2) from cps_data
+	UNION ALL
+SELECT 'hazardous_pay MAX/MIN/AVG/STD DEV:',MAX(hazardous_pay), MIN(hazardous_pay), ROUND(AVG(hazardous_pay),2), ROUND(STDDEV(hazardous_pay),2) from cps_data
+	UNION ALL
+SELECT 'employee_refund MAX/MIN/AVG/STD DEV:',MAX(employee_refund), MIN(employee_refund), ROUND(AVG(employee_refund),2), ROUND(STDDEV(employee_refund),2) from cps_data
+	UNION ALL
+SELECT 'longevity MAX/MIN/AVG/STD DEV:',MAX(longevity), MIN(longevity), ROUND(AVG(longevity),2), ROUND(STDDEV(longevity),2) from cps_data
+	UNION ALL
+SELECT 'commander_pay MAX/MIN/AVG/STD DEV:',MAX(commander_pay), MIN(commander_pay), ROUND(AVG(commander_pay),2), ROUND(STDDEV(commander_pay),2) from cps_data
+	UNION ALL
+SELECT 'field_training_pay MAX/MIN/AVG/STD DEV:',MAX(field_training_pay), MIN(field_training_pay), ROUND(AVG(field_training_pay),2), ROUND(STDDEV(field_training_pay),2) from cps_data
+	UNION ALL
+SELECT 'aviation_pay MAX/MIN/AVG/STD DEV:',MAX(aviation_pay), MIN(aviation_pay), ROUND(AVG(aviation_pay),2), ROUND(STDDEV(aviation_pay),2) from cps_data
+	UNION ALL
+
+/*Obtain average job tenures by department*/
+WITH t2 AS (WITH t1 AS (SELECT
+	uniqueid
+	,first_name
+	,last_name
+	,job_title
+	,department_name
+	,current_hire_date
+	,COALESCE(CAST(employment_end_date as text), 'employed') as end_date
+	,ROUND((COALESCE(employment_end_date, CURRENT_DATE) - current_hire_date) * 1.0/365,5) as tenure_in_yrs
+FROM 
+	cps_data
+ORDER BY 
+	COALESCE(employment_end_date, CURRENT_DATE) - current_hire_date DESC)
+
+SELECT 
+	uniqueid
+	,first_name
+	,last_name
+	,department_name
+	,job_title
+	,current_hire_date
+	,end_date
+	,tenure_in_yrs
+FROM
+	t1
+GROUP BY
+	uniqueid
+	,first_name
+	,last_name
+	,job_title
+	,department_name
+	,current_hire_date
+	,end_date
+	,tenure_in_yrs
+ORDER BY 
+	tenure_in_yrs)
+SELECT 
+	department_name
+	,ROUND(AVG(tenure_in_yrs),2) as avg_dept_tenure
+FROM t2
+GROUP BY 
+	department_name;
+
+/*Obtain average job tenures by job_title*/
+WITH t2 AS (WITH t1 AS (SELECT
+	uniqueid
+	,first_name
+	,last_name
+	,job_title
+	,department_name
+	,current_hire_date
+	,COALESCE(CAST(employment_end_date as text), 'employed') as end_date
+	,ROUND((COALESCE(employment_end_date, CURRENT_DATE) - current_hire_date) * 1.0/365,5) as tenure_in_yrs
+FROM 
+	cps_data
+ORDER BY 
+	COALESCE(employment_end_date, CURRENT_DATE) - current_hire_date DESC)
+
+SELECT 
+	uniqueid
+	,first_name
+	,last_name
+	,department_name
+	,job_title
+	,current_hire_date
+	,end_date
+	,tenure_in_yrs
+FROM
+	t1
+GROUP BY
+	uniqueid
+	,first_name
+	,last_name
+	,job_title
+	,department_name
+	,current_hire_date
+	,end_date
+	,tenure_in_yrs
+ORDER BY 
+	tenure_in_yrs)
+SELECT 
+	job_title
+	,ROUND(AVG(tenure_in_yrs),2) as avg_dept_tenure
+FROM t2
+GROUP BY 
+	job_title;
+
+
+
+/*Obtain average yearly department base pay, average gross pay, and difference*/ 
+SELECT 
+	year
+	,department_name
+	,ROUND(AVG(base_pay),2) as avg_base_pay
+	,ROUND(AVG(gross_pay),2) as avg_gross_pay
+	,ROUND(AVG(total_ot_pay),2) as avg_ot_pay
+	,ROUND(AVG(total_ot_hours),2) as avg_ot_hrs
+	,ROUND(AVG(gross_pay) - AVG(base_pay),2) as pay_diff
+FROM 
+	cps_data
+GROUP BY 
+	year
+	,department_name
+ORDER BY
+	year
+	,ROUND(AVG(gross_pay) - AVG(base_pay),2) DESC;
+
+/*Obtain all employee pay info(job title, department, years worked, employment status, job title, department, and ot hours)*/
+WITH t1 AS (SELECT 
+	uniqueid
+	,year
+	,current_hire_date as hire_date
+	,employment_status
+	,job_title
+	,department_name
+	,DENSE_RANK() OVER(PARTITION BY uniqueid ORDER BY year) as years_worked
+	,base_pay
+	,gross_pay
+	,total_ot_pay
+	,total_ot_hours
+FROM 
+	cps_data
+WHERE
+	uniqueid NOT IN ('0xE77F722F7F442EDC2952C99DF5EE445A3D913D72'
+					,'0x55DE59D66D3DC337B551018DBC89A20BB3CE7C08'
+					,'0x62A227110055C937D62B8012BDD0769564870FE2'
+					,'0xC30B51D7DFE23A8F2748064A07A92D2CACDC1196'
+					,'0xEBCAB2A931B194B46B7AF052D17915E104A90428'))
+SELECT 
+	uniqueid
+	,year
+	,hire_date
+	,employment_status
+	,job_title
+	,department_name
+	,MAX(years_worked) OVER(PARTITION BY uniqueid) as years_worked
+	,base_pay
+	,gross_pay
+	,total_ot_hours
+FROM
+	t1;
+		
