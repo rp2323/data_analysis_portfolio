@@ -220,35 +220,28 @@ FROM
 
 ## Analysis
 ### What Departments Lead in Average Base Pay?
-
-
-![base_pay_dept](https://github.com/rp2323/data_analysis_portfolio/assets/126728422/d0d247c1-e4e0-445b-9eae-078619b33d4b)
+![](https://github.com/rp2323/data_analysis_portfolio/blob/46424c0464f9ee898bc5185ed72c5d5e44be8374/city_parish_salaries_project/images/base_pay_dept.png)
 
 ### What Departments Lead in Average Gross Pay?
-
-
-![gross_pay_dept](https://github.com/rp2323/data_analysis_portfolio/assets/126728422/da39f155-5872-442f-9647-faa433001fb2)
+![](https://github.com/rp2323/data_analysis_portfolio/blob/46424c0464f9ee898bc5185ed72c5d5e44be8374/city_parish_salaries_project/images/gross_pay_dept.png)
 
 ### What Departments Lead in Total Overtime Hours?
-
-![total_ot_hrs_dept](https://github.com/rp2323/data_analysis_portfolio/assets/126728422/bb9ff147-9cd8-4f28-ac5d-cc77c042dd55)
+![total_ot_hrs_dept](https://github.com/rp2323/data_analysis_portfolio/blob/46424c0464f9ee898bc5185ed72c5d5e44be8374/city_parish_salaries_project/images/total_ot_hrs_dept.png)
 
 
 ### What Departments Lead in Total Employee Headcount?
-
-![employee_count_dept](https://github.com/rp2323/data_analysis_portfolio/assets/126728422/c1da7fb9-5861-40cd-93ad-0ec505b7fa56)
+![](https://github.com/rp2323/data_analysis_portfolio/blob/46424c0464f9ee898bc5185ed72c5d5e44be8374/city_parish_salaries_project/images/employee_count_dept.png)
 
 ### What Positions Pay the Highest Average Base Pay?
-
-![base_pay_position](https://github.com/rp2323/data_analysis_portfolio/assets/126728422/908fb351-de54-4d7f-88ec-a8d5e8ec27b3)
+![](https://github.com/rp2323/data_analysis_portfolio/blob/46424c0464f9ee898bc5185ed72c5d5e44be8374/city_parish_salaries_project/images/base_pay_position.png)
 
 ### What Positions Pay the Highest Average Gross Pay?
 
-![gross_pay_position](https://github.com/rp2323/data_analysis_portfolio/assets/126728422/f8dd7c5a-bc8f-46e3-b403-02ade6b0e03d)
+![](https://github.com/rp2323/data_analysis_portfolio/blob/46424c0464f9ee898bc5185ed72c5d5e44be8374/city_parish_salaries_project/images/gross_pay_position.png)
 
 ### How Have Base Pay And Gross Pay Trended Over the Past Five Years?
 
-![bp_vs_gp_allyrs_2](https://github.com/rp2323/data_analysis_portfolio/assets/126728422/edd51437-53e3-4648-9f3c-8c173843ced8)
+![bp_vs_gp_allyrs_2](https://github.com/rp2323/data_analysis_portfolio/blob/46424c0464f9ee898bc5185ed72c5d5e44be8374/city_parish_salaries_project/images/bp_vs_gp_allyrs_2.png)
 
 
 
