@@ -1,4 +1,4 @@
-## Project Description
+## East Baton Rouge City-Parish Salary Analysis
 This project is intended to address the following key questions using the [City-Parish Salary Data supplied by the East Baton Rouge city-parish website](https://data.brla.gov/Government/City-Parish-Employee-Annual-Salaries/g9vh-zeiw):   
 
 * What departments lead in average base pay (annual salary not including additional earning allowances)?
