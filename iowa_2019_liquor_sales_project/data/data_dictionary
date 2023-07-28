@@ -1,0 +1,26 @@
+The dataset is too large to upload as a CSV, but you can find it here: https://data.iowa.gov/Sales-Distribution/2019-Iowa-Liquor-Sales/38x4-vs5h. 
+
+Invoice/Item Number - Concatenated invoice and line number associated with the liquor order. This provides a unique identifier for the individual liquor products included in the store order...DATA TYPE: Plain Text
+Date - Date of order...DATA TYPE: Date & Time
+Store Number - Unique number assigned to the store who ordered the liquor....DATA TYPE: Plain Text
+Store Name - Name of store who ordered the liquor....DATA TYPE: Plain Text
+Address - Address of store who ordered the liquor....DATA TYPE: Plain Text
+City - City where the store who ordered the liquor is located...DATA TYPE: Plain Text
+Zip Code - Zip code where the store who ordered the liquor is located...DATA TYPE: Plain Text
+Store Location - Location of store who ordered the liquor. The Address, City, State and Zip Code are geocoded to provide geographic coordinates. Accuracy of geocoding is dependent on how well the address is interpreted and the completeness of the reference data used. Left NULL where unable to provide point location....DATA TYPE: Point
+County Number - Iowa county number for the county where store who ordered the liquor is located...DATA TYPE: Plain Text
+County - County where the store who ordered the liquor is located...DATA TYPE: Plain Text
+Category - Category code associated with the liquor ordered...DATA TYPE: Plain Text
+Category Name - Category of the liquor ordered....DATA TYPE: Plain Text
+Vendor Number - The vendor number of the company for the brand of liquor ordered...DATA TYPE: Plain Text
+Vendor Name - The vendor name of the company for the brand of liquor ordered...DATA TYPE: Plain Text
+Item Number - Item number for the individual liquor product ordered....DATA TYPE: Plain Text
+Item Description - Description of the individual liquor product ordered....DATA TYPE: Plain Text
+Pack - The number of bottles in a case for the liquor ordered...DATA TYPE: Number
+Bottle Volume (ml) - Volume of each liquor bottle ordered in milliliters....DATA TYPE: Number
+State Bottle Cost - The amount that Alcoholic Beverages Division paid for each bottle of liquor ordered...DATA TYPE: Number
+State Bottle Retail - The amount the store paid for each bottle of liquor ordered...DATA TYPE: Number
+Bottles Sold - The number of bottles of liquor ordered by the store...DATA TYPE: Number
+Sale (Dollars) - Total cost of liquor order (number of bottles multiplied by the state bottle retail)...DATA TYPE: Number
+Volume Sold (Liters) - Total volume of liquor ordered in liters. (i.e. (Bottle Volume (ml) x Bottles Sold)/1,000)...DATA TYPE: Number
+Volume Sold (Gallons) - Total volume of liquor ordered in gallons. (i.e. (Bottle Volume (ml) x Bottles Sold)/3785.411784)...DATA TYPE: Number
