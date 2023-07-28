@@ -1,0 +1,257 @@
+/* Obtain count of all rows in table*/
+SELECT 
+	COUNT(*)
+FROM 
+	ia_2019_ls1;
+
+/*Obtain null counts for all columns*/
+SELECT 'invoice_item_number_nullcount', COUNT(*) - COUNT(invoice_item_number) FROM ia_2019_ls1
+UNION
+SELECT 'date_nullcount', COUNT(*) - COUNT(date) FROM ia_2019_ls1
+UNION
+SELECT 'store_number_nullcount', COUNT(*) - COUNT(store_number) FROM ia_2019_ls1
+UNION
+SELECT 'store_name_nullcount', COUNT(*) - COUNT(store_name) FROM ia_2019_ls1
+UNION
+SELECT 'address_nullcount', COUNT(*) - COUNT(address) FROM ia_2019_ls1
+UNION
+SELECT 'city_nullcount', COUNT(*) - COUNT(city) FROM ia_2019_ls1
+UNION
+SELECT 'zip_code_nullcount', COUNT(*) - COUNT(zip_code) FROM ia_2019_ls1
+UNION
+SELECT 'store_location_nullcount', COUNT(*) - COUNT(store_location) FROM ia_2019_ls1
+UNION
+SELECT 'county_number_nullcount', COUNT(*) - COUNT(county_number) FROM ia_2019_ls1
+UNION
+SELECT 'county_nullcount', COUNT(*) - COUNT(county) FROM ia_2019_ls1
+UNION
+SELECT 'category_nullcount', COUNT(*) - COUNT(category) FROM ia_2019_ls1
+UNION
+SELECT 'category_name_nullcount', COUNT(*) - COUNT(category_name) FROM ia_2019_ls1
+UNION
+SELECT 'vendor_number_nullcount', COUNT(*) - COUNT(vendor_number) FROM ia_2019_ls1
+UNION
+SELECT 'vendor_name_nullcount', COUNT(*) - COUNT(vendor_name) FROM ia_2019_ls1
+UNION
+SELECT 'item_number_nullcount', COUNT(*) - COUNT(item_number) FROM ia_2019_ls1
+UNION
+SELECT 'item_description_nullcount', COUNT(*) - COUNT(item_description) FROM ia_2019_ls1
+UNION
+SELECT 'pack_nullcount', COUNT(*) - COUNT(pack) FROM ia_2019_ls1
+UNION
+SELECT 'bottle_volume_ml_nullcount', COUNT(*) - COUNT(bottle_volume_ml) FROM ia_2019_ls1
+UNION
+SELECT 'state_bottle_cost_nullcount', COUNT(*) - COUNT(state_bottle_cost) FROM ia_2019_ls1
+UNION
+SELECT 'state_bottle_retail_nullcount', COUNT(*) - COUNT(state_bottle_retail) FROM ia_2019_ls1
+UNION
+SELECT 'bottles_sold_nullcount', COUNT(*) - COUNT(bottles_sold) FROM ia_2019_ls1
+UNION
+SELECT 'sale_dollars_nullcount', COUNT(*) - COUNT(sale_dollars) FROM ia_2019_ls1
+UNION
+SELECT 'volume_sold_liters_nullcount', COUNT(*) - COUNT(volume_sold_liters) FROM ia_2019_ls1
+UNION
+SELECT 'volume_sold_gallons_nullcount', COUNT(*) - COUNT(volume_sold_gallons) FROM ia_2019_ls1;
+
+
+/*Create new table with rows missing values removed*/
+SELECT *
+INTO ia_2019_ls2
+FROM ia_2019_ls1
+WHERE
+	county_number IS NOT NULL AND
+	category_name IS NOT NULL;
+
+/*Check that new table has no null values in important columns*/
+SELECT 'invoice_item_number_nullcount', COUNT(*) - COUNT(invoice_item_number), ROUND(COUNT(invoice_item_number) *1.0 / 2380345,4) FROM ia_2019_ls2
+UNION
+SELECT 'date_nullcount', COUNT(*) - COUNT(date), ROUND(COUNT(date) *1.0 / 2380345,4) FROM ia_2019_ls2
+UNION
+SELECT 'store_number_nullcount', COUNT(*) - COUNT(store_number), ROUND(COUNT(store_number) *1.0 / 2380345,4) FROM ia_2019_ls2
+UNION
+SELECT 'store_name_nullcount', COUNT(*) - COUNT(store_name), ROUND(COUNT(store_name) *1.0 / 2380345,4) FROM ia_2019_ls2
+UNION
+SELECT 'address_nullcount', COUNT(*) - COUNT(address), ROUND(COUNT(address) *1.0 / 2380345,4) FROM ia_2019_ls2
+UNION
+SELECT 'city_nullcount', COUNT(*) - COUNT(city), ROUND(COUNT(city) *1.0 / 2380345,4) FROM ia_2019_ls2
+UNION
+SELECT 'zip_code_nullcount', COUNT(*) - COUNT(zip_code), ROUND(COUNT(zip_code) *1.0 / 2380345,4) FROM ia_2019_ls2
+UNION
+SELECT 'store_location_nullcount', COUNT(*) - COUNT(store_location), ROUND(COUNT(store_location) *1.0 / 2380345,4) FROM ia_2019_ls2
+UNION
+SELECT 'county_number_nullcount', COUNT(*) - COUNT(county_number), ROUND(COUNT(county_number) *1.0 / 2380345,4) FROM ia_2019_ls2
+UNION
+SELECT 'county_nullcount', COUNT(*) - COUNT(county), ROUND(COUNT(county) *1.0 / 2380345,4) FROM ia_2019_ls2
+UNION
+SELECT 'category_nullcount', COUNT(*) - COUNT(category), ROUND(COUNT(category) *1.0 / 2380345,4) FROM ia_2019_ls2
+UNION
+SELECT 'category_name_nullcount', COUNT(*) - COUNT(category_name), ROUND(COUNT(category_name) *1.0 / 2380345,4) FROM ia_2019_ls2
+UNION
+SELECT 'vendor_number_nullcount', COUNT(*) - COUNT(vendor_number), ROUND(COUNT(vendor_number) *1.0 / 2380345,4) FROM ia_2019_ls2
+UNION
+SELECT 'vendor_name_nullcount', COUNT(*) - COUNT(vendor_name), ROUND(COUNT(vendor_name) *1.0 / 2380345,4) FROM ia_2019_ls2
+UNION
+SELECT 'item_number_nullcount', COUNT(*) - COUNT(item_number), ROUND(COUNT(item_number) *1.0 / 2380345,4) FROM ia_2019_ls2
+UNION
+SELECT 'item_description_nullcount', COUNT(*) - COUNT(item_description), ROUND(COUNT(item_description) *1.0 / 2380345,4) FROM ia_2019_ls2
+UNION
+SELECT 'pack_nullcount', COUNT(*) - COUNT(pack), ROUND(COUNT(pack) *1.0 / 2380345,4) FROM ia_2019_ls2
+UNION
+SELECT 'bottle_volume_ml_nullcount', COUNT(*) - COUNT(bottle_volume_ml), ROUND(COUNT(bottle_volume_ml) *1.0 / 2380345,4) FROM ia_2019_ls2
+UNION
+SELECT 'state_bottle_cost_nullcount', COUNT(*) - COUNT(state_bottle_cost), ROUND(COUNT(state_bottle_cost) *1.0 / 2380345,4) FROM ia_2019_ls2
+UNION
+SELECT 'state_bottle_retail_nullcount', COUNT(*) - COUNT(state_bottle_retail), ROUND(COUNT(state_bottle_retail) *1.0 / 2380345,4) FROM ia_2019_ls2
+UNION
+SELECT 'bottles_sold_nullcount', COUNT(*) - COUNT(bottles_sold), ROUND(COUNT(bottles_sold) *1.0 / 2380345,4) FROM ia_2019_ls2
+UNION
+SELECT 'sale_dollars_nullcount', COUNT(*) - COUNT(sale_dollars), ROUND(COUNT(sale_dollars) *1.0 / 2380345,4) FROM ia_2019_ls2
+UNION
+SELECT 'volume_sold_liters_nullcount', COUNT(*) - COUNT(volume_sold_liters), ROUND(COUNT(volume_sold_liters) *1.0 / 2380345,4) FROM ia_2019_ls2
+UNION
+SELECT 'volume_sold_gallons_nullcount', COUNT(*) - COUNT(volume_sold_gallons), ROUND(COUNT(volume_sold_gallons) *1.0 / 2380345,4) FROM ia_2019_ls2;
+
+/*Rule out duplicate invoices IDs since they'll function as primary keys*/
+SELECT
+	DISTINCT invoice_item_number as unique_invoice_num
+	,COUNT(*) as count
+FROM
+	ia_2019_ls2
+GROUP BY
+	DISTINCT invoice_item_number
+ORDER BY
+	COUNT(*) DESC;
+
+/*Obtain average, median, standard deviation, max, and min values from all numeric columns, similar to pandas describe()*/
+SELECT 'pack', AVG(pack) as avg , PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY pack) as median, STDDEV(pack) as std_dev, max(pack) AS MAX, min(pack) AS MIN FROM ia_2019_ls2
+UNION
+SELECT 'bottle_volume_ml', AVG(bottle_volume_ml) as avg , PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY bottle_volume_ml) as median, STDDEV(bottle_volume_ml) as std_dev, max(bottle_volume_ml) AS MAX, min(bottle_volume_ml) AS MIN FROM ia_2019_ls2
+UNION
+SELECT 'state_bottle_cost', AVG(state_bottle_cost) as avg , PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY state_bottle_cost) as median, STDDEV(state_bottle_cost) as std_dev, max(state_bottle_cost) AS MAX, min(state_bottle_cost) AS MIN FROM ia_2019_ls2
+UNION
+SELECT 'state_bottle_retail', AVG(state_bottle_retail) as avg , PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY state_bottle_retail) as median, STDDEV(state_bottle_retail) as std_dev, max(state_bottle_retail) AS MAX, min(state_bottle_retail) AS MIN FROM ia_2019_ls2
+UNION
+SELECT 'bottles_sold', AVG(bottles_sold) as avg , PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY bottles_sold) as median, STDDEV(bottles_sold) as std_dev, max(bottles_sold) AS MAX, min(bottles_sold) AS MIN FROM ia_2019_ls2
+UNION
+SELECT 'sale_dollars', AVG(sale_dollars) as avg , PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY sale_dollars) as median, STDDEV(sale_dollars) as std_dev, max(sale_dollars) AS MAX, min(sale_dollars) AS MIN FROM ia_2019_ls2
+UNION
+SELECT 'volume_sold_liters', AVG(volume_sold_liters) as avg , PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY volume_sold_liters) as median, STDDEV(volume_sold_liters) as std_dev, max(volume_sold_liters) AS MAX, min(volume_sold_liters) AS MIN FROM ia_2019_ls2
+UNION
+SELECT 'volume_sold_gallons', AVG(volume_sold_gallons) as avg , PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY volume_sold_gallons) as median, STDDEV(volume_sold_gallons) as std_dev, max(volume_sold_gallons) AS MAX, min(volume_sold_gallons) AS MIN FROM ia_2019_ls2;
+
+/*Find the interquartile range for all columns*/
+SELECT PERCENTILE_CONT(0.75) WITHIN GROUP(ORDER BY(state_bottle_retail) )- PERCENTILE_CONT(0.25) WITHIN GROUP(ORDER BY(state_bottle_retail))as state_bottle_retail_iqr FROM ia_2019_ls2
+SELECT PERCENTILE_CONT(0.75) WITHIN GROUP(ORDER BY(pack) )- PERCENTILE_CONT(0.25) WITHIN GROUP(ORDER BY(pack))as pack_iqr FROM ia_2019_ls2
+SELECT PERCENTILE_CONT(0.75) WITHIN GROUP(ORDER BY(volume_sold_gallons) )- PERCENTILE_CONT(0.25) WITHIN GROUP(ORDER BY(volume_sold_gallons))as volume_sold_gallons_iqr FROM ia_2019_ls2
+SELECT PERCENTILE_CONT(0.75) WITHIN GROUP(ORDER BY(state_bottle_cost) )- PERCENTILE_CONT(0.25) WITHIN GROUP(ORDER BY(state_bottle_cost))as state_bottle_cost_iqr FROM ia_2019_ls2
+SELECT PERCENTILE_CONT(0.75) WITHIN GROUP(ORDER BY(bottles_sold) )- PERCENTILE_CONT(0.25) WITHIN GROUP(ORDER BY(bottles_sold))as bottles_sold_iqr FROM ia_2019_ls2
+SELECT PERCENTILE_CONT(0.75) WITHIN GROUP(ORDER BY(bottle_volume_ml) )- PERCENTILE_CONT(0.25) WITHIN GROUP(ORDER BY(bottle_volume_ml))as bottle_volume_ml_iqr FROM ia_2019_ls2
+SELECT PERCENTILE_CONT(0.75) WITHIN GROUP(ORDER BY(volume_sold_liters) )- PERCENTILE_CONT(0.25) WITHIN GROUP(ORDER BY(volume_sold_liters))as volume_sold_liters_iqr FROM ia_2019_ls2
+SELECT PERCENTILE_CONT(0.75) WITHIN GROUP(ORDER BY(sale_dollars) )- PERCENTILE_CONT(0.25) WITHIN GROUP(ORDER BY(sale_dollars))as sale_dollars_iqr FROM ia_2019_ls2
+
+/*Find counts for city, county, store, vendor, category, and item 
+Answers'How many distinct items are in each of these categorical variables?'*/
+SELECT 
+	COUNT(DISTINCT city) as city_count
+	,COUNT(DISTINCT county) as county_count
+	,COUNT(DISTINCT store_number) as store_count
+	,COUNT(DISTINCT vendor_number) as vendor_count
+	,COUNT(DISTINCT category) as category_count
+	,COUNT(DISTINCT item_number) as item_count
+FROM
+	ia_2019_ls2;
+
+/*Find the sales totals by date, include day of week and month of year 
+Answers 'Are there seasonal peaks?'*/
+SELECT 
+	date
+	,TO_CHAR(date, 'day') as day_of_week
+	,To_CHAR(date,'month') as month_of_year
+	,sum(sale_dollars) as total_sales
+FROM ia_2019_ls2
+GROUP BY
+	date
+ORDER BY 
+	date;
+
+/*Find monthly sales by store *
+Answers 'What individual store ordered the most liquor?'/
+SELECT 
+	DISTINCT store_name
+	,To_CHAR(date,'month') as month_of_year
+	,city
+	,county
+	,sum(sale_dollars) as total_sales
+FROM 
+	ia_2019_ls2
+GROUP BY
+	store_number
+	,store_name
+	,city
+	,county
+	,To_CHAR(date,'month')
+ORDER BY 
+	sum(sale_dollars) DESC;
+
+/*Find monthly sales by vendor 
+Answers 'Which brand sold the most liquor?' */
+SELECT 
+	DISTINCT vendor_name
+	,vendor_number
+	,To_CHAR(date,'month') as month_of_year
+	,sum(sale_dollars) as total_sales
+FROM 
+	ia_2019_ls2
+GROUP BY
+	vendor_number
+	,vendor_name
+	,To_CHAR(date,'month')
+ORDER BY 
+	sum(sale_dollars) DESC;
+
+
+/*Find monthly sales by category
+Answers 'Which category of liquor was ordered the most?'*/
+SELECT 
+	DISTINCT category_name
+	,category
+	,To_CHAR(date,'month') as month_of_year
+	,sum(sale_dollars) as total_sales
+FROM 
+	ia_2019_ls2
+GROUP BY
+	category
+	,category_name
+	,To_CHAR(date,'month')
+ORDER BY 
+	sum(sale_dollars) DESC;
+
+/*Find monthly sales by county 
+Answers 'Which county ordered the most liquor?'*/
+SELECT 
+	DISTINCT county
+	,RANK() OVER(PARTITION BY To_CHAR(date,'month') ORDER BY sum(sale_dollars) DESC)
+	,To_CHAR(date,'month') as month_of_year
+	,sum(sale_dollars) as total_sales
+FROM 
+	ia_2019_ls2
+GROUP BY
+	county
+	,To_CHAR(date,'month')
+ORDER BY 
+	sum(sale_dollars) DESC;
+	
+/*Find monthly sales by city 
+Answers 'Which city ordered the msot liquor?'*/
+SELECT 
+	DISTINCT city
+	,RANK() OVER(PARTITION BY To_CHAR(date,'month') ORDER BY sum(sale_dollars) DESC)
+	,To_CHAR(date,'month') as month_of_year
+	,sum(sale_dollars) as total_sales
+FROM 
+	ia_2019_ls2
+GROUP BY
+	city
+	,To_CHAR(date,'month')
+ORDER BY 
+	sum(sale_dollars) DESC;
