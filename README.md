@@ -4,5 +4,6 @@ This repository will include summary writeups for all my data analysis projects 
 ## Recent projects 
 * [Cary, NC Police Incident Data Analysis](https://github.com/rp2323/data_analysis_portfolio/tree/main/cary_police_data_project)
 * [East Baton Rouge City-Parish Employee Salary Data Analysis](https://github.com/rp2323/data_analysis_portfolio/tree/main/city_parish_salaries_project)
+* [Iowa Liquor Sales Data Analysis](https://github.com/rp2323/data_analysis_portfolio/tree/main/iowa_2019_liquor_sales_project)
 
 [LinkedIn Profile](http://www.linkedin.com/in/raphael-peterson-03212073)
