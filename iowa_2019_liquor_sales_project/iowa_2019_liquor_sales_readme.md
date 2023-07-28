@@ -16,10 +16,10 @@ The dataset was drawn from invoiced orders from Iowa Class 'E' liquor licensees 
 ## Business Problem
 The state of Iowa's Alcoholic Beverages Division wants to know more about the liquor purhcased by licensed businesses in 2019, including the top-selling categories and items as well as the counties, cities, and class 'E' licensees (grocery stores, liquor stores, etc.) that purchased the most liquor.  
 
-## Key Findings 
+## Key Findings
 
 ### How Much Liquor Was Ordered by Iowa Liquor Sellers in 2019?  
-**$348,279,944.00**. The worst month for total sales was January, after which purchases steadily climbed toward the best month of sales in December (with one outlier peak in May).   
+**$348,279,944.00**. The worst month for total sales was January, after which purchases steadily climbed toward the best month of sales in December (with one outlier peak in May).  
 
 ### What Was the Best-Selling Item?
 **American vodkas**, which composed **$51,657,037.00** of the orders.
@@ -43,7 +43,7 @@ The state of Iowa's Alcoholic Beverages Division wants to know more about the li
 * **Python** - supplementary analysis (confirming SQL findings) 
 * **Tableau** - visualizations
 
-## Results at a Glance  
+## Results at a Glance
 ![](https://github.com/rp2323/data_analysis_portfolio/blob/83097a6096d332977cf9ff4beee3a78982d9b344/iowa_2019_liquor_sales_project/images/totals.png)  
 
 ![](https://github.com/rp2323/data_analysis_portfolio/blob/83097a6096d332977cf9ff4beee3a78982d9b344/iowa_2019_liquor_sales_project/images/2019_overall_time_series.png) 
