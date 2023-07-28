@@ -5,13 +5,13 @@ The dataset was drawn from invoiced orders from Iowa Class 'E' liquor licensees 
 
 
 # Table of Contents
-1. [Business Problem](#business_problem)
-2. [Key Findings](#key_findings)
+1. [Business Problem](#business-problem)
+2. [Key Findings](#key-findings)
 3. [Tools](#tools)
-4. [Results at a Glance](#results_at_a_glance)
+4. [Results at a Glance](#results-at-a-glance)
 5. [Limitations](#limitations)
-6. [Explore the Code](#explore_the_code)
-7. [Explore the Dashboard](#explore_the_dashboard)
+6. [Explore the Code](#explore-the-code)
+7. [Explore the Dashboard](#explore-the-dashboard)
 
 ## Business Problem
 The state of Iowa's Alcoholic Beverages Division wants to know more about the liquor purhcased by licensed businesses in 2019, including the top-selling categories and items as well as the counties, cities, and class 'E' licensees (grocery stores, liquor stores, etc.) that purchased the most liquor.  
