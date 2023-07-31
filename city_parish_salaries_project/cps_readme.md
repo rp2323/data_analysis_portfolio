@@ -114,8 +114,9 @@ SELECT 'uniqueid_null_count', COUNT(CASE WHEN uniqueid IS NULL THEN uniqueid END
 
 * Ruled out active employees with populated 'end of employment' dates/inactive employees without termination dates (seven employees were discovered, leading to 19 total rows removed from the dataset prior to analysis).
 
-![emp_with_earlier_term_dates](https://github.com/rp2323/data_analysis_portfolio/assets/126728422/9123ba1b-45ad-4b74-a581-a7204a6732ad)
-![inactive_no_term_date](https://github.com/rp2323/data_analysis_portfolio/assets/126728422/3f25da12-2dee-475a-824d-818fd193bbac)
+![emp_with_earlier_term_dates](https://github.com/rp2323/data_analysis_portfolio/blob/01dde66885505938a026cf9f6281ac86c6df6930/city_parish_salaries_project/images/emp_with_earlier_term_dates.png)
+
+![inactive_no_term_date](https://github.com/rp2323/data_analysis_portfolio/blob/01dde66885505938a026cf9f6281ac86c6df6930/city_parish_salaries_project/images/inactive_no_term_date.png)
 
 <details>
 <summary>
