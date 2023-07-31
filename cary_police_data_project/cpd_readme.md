@@ -164,5 +164,5 @@ GROUP BY
 ## How Do the Top Incidents Types Compare?
 Once I was able to establish that different types of fraud were the most common 'all other' incident type, I was curious how they compared with the most common non-'all other' type, larceny. *While larceny maintained a steady percentage of 26-29%, fraud incidents accounted for 11-15%, or roughly half of the lareceny incidents.*
 
-![fraud_vs_larceny](https://github.com/rp2323/data_analysis_portfolio/blob/23e766765721ca6f40473e9ef7108db872492514/cary_police_data_project/images/fraud_vs_larceny.png)
+![fraud_vs_larceny](https://github.com/rp2323/data_analysis_portfolio/blob/23e766765721ca6f40473e9ef7108db872492514/cary_police_data_project/images/fraud_vs_larceny.png) 
 <sub>*graph created in Excel</sub> 
