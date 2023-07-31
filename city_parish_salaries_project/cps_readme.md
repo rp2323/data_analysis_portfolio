@@ -1,5 +1,5 @@
 ## East Baton Rouge City-Parish Salary Analysis
-This project is intended to address the following key questions using the [City-Parish Salary Data supplied by the East Baton Rouge city-parish website](https://data.brla.gov/Government/City-Parish-Employee-Annual-Salaries/g9vh-zeiw):   
+This project is intended to address the following key questions using the [city-parish salary data supplied by the East Baton Rouge city-parish website](https://data.brla.gov/Government/City-Parish-Employee-Annual-Salaries/g9vh-zeiw):   
 
 * What departments lead in average base pay (annual salary not including additional earning allowances)?
 * What departments lead in average gross pay (base pay plus overtime plus any extra earnings)?
@@ -9,22 +9,22 @@ This project is intended to address the following key questions using the [City-
 * What positions pay the highest average gross pay?
 * How have base pay and gross pay trended over the past five years?
 
-I completed initial data manimpulation in PostgreSQL and then created [Tableau dashboard](https://public.tableau.com/views/baton_rouge_completed_dashboard_1/Dashboard1?:language=en-US&:display_count=n&:origin=viz_share_link) for stakeholders to review. 
+I completed the initial data manipulation in PostgreSQL and then created a [Tableau dashboard](https://public.tableau.com/views/baton_rouge_completed_dashboard_1/Dashboard1?:language=en-US&:display_count=n&:origin=viz_share_link) for stakeholders to review/explore. 
 
-## Summary of Findings
-1. The Council Budget Office has the highest average salary ($62k) when not accounting for number of employees. When limited to departments with at least 10 employees, Information Services has the highest average base pay ($55k). When limited to at least 100 employees, the fire department has the highest average base pay ($52k).
+## Key Findings
+1. The Council Budget Office has the highest average base salary **($62k)** when not accounting for number of employees. When limited to departments with at least 10 employees, Information Services has the highest average base pay **($55k)**. When limited to at least 100 employees, the fire department has the highest average base pay **($52k)**.
 2. The Council Budget Office ($64k) and fire department ($63k) also lead for average gross pay.
 3. The police department led all departments in total OT hours from 2018 to 2020 before falling behind the fire department for 2021 and 2022.
-4. The police department led all departments in total employees, accounting for 18-20% of all government employees across all five years.
+4. The police department had the highest employee headcount, accounting for 18-20% of all government employees across all five years.
 5. The mayor led all individual gross/base salaries with $175k, followed by the police chief ($149k).
 
 ## About the Data
 The dataset encompasses salary for all departments of the East Baton Rouge City-Parish from 2018 to 2022 (24,346 unique rows). The dataset included a data dictionary which defined all fields. The data was last updated 1/19/23 at the time of export. 
 
 ## Data Cleaning
-After uploading hte dataset to a local PostgreSQL server, I reviewed for problematic data characteristics: 
+After uploading the dataset to a local PostgreSQL server, I reviewed for problematic data characteristics: 
 
-* Obtained NULL counts for all columns - the only columns with considerable NULL value counts were the employment end date and middle initial, neither of which were problematic.
+* Obtained NULL counts for all columns - the only columns with considerable NULL value counts were the employment end date and middle initial, neither of which were problematic for analysis.
 <details>
 <summary>
 
