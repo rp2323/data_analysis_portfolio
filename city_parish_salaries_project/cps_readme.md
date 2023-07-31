@@ -1,4 +1,4 @@
-## East Baton Rouge City-Parish Salary Analysis
+# East Baton Rouge City-Parish Salary Analysis
 This project is intended to address the following key questions using the [city-parish salary data supplied by the East Baton Rouge city-parish website](https://data.brla.gov/Government/City-Parish-Employee-Annual-Salaries/g9vh-zeiw):   
 
 * What departments lead in average base pay (annual salary not including additional earning allowances)?
@@ -112,7 +112,7 @@ SELECT 'uniqueid_null_count', COUNT(CASE WHEN uniqueid IS NULL THEN uniqueid END
 ```
 </details>
 
-* Ruled out active employees with populated 'end of employment' dates/inactive employees without termination dates (seven employees were discovered, leading to 19 total rows removed from the dataset prior to analysis).
+* Identified active employees with populated 'end of employment' dates and inactive employees lacking termination dates--due to an inability to confirm the employment status of these employees, they were removed from the dataset, leading to a decrease of 19 rows total.
 
 ![emp_with_earlier_term_dates](https://github.com/rp2323/data_analysis_portfolio/blob/01dde66885505938a026cf9f6281ac86c6df6930/city_parish_salaries_project/images/emp_with_earlier_term_dates.png)
 
@@ -179,10 +179,10 @@ WHERE
 	employment_end_date IS NOT NULL 
 	AND employment_status = 'A';
 ```
-* Ruled out mismatched job title/code combinations
+* Identify mismatched job title/code combinations
 
 ```sql
-</details>
+
 /*Find instances where job titles match but job codes do not*/
 SELECT 
 	DISTINCT(cps.job_title)
@@ -191,7 +191,9 @@ FROM
 	cps_data cps JOIN 
 	cps_data cps1 ON cps.job_title = cps1.job_title
 WHERE cps.job_code != cps1.job_code;
-
+```
+* There were two cases of a common job title being shared by multiple job codes (8 employees shared the 'crime statistician' title and 18 employees shared the 'program coordinator' title. Without means to verify the difference among the job codes, these employees were rolled up into the same title. 
+```sql
 /*Obtain counts of employees with mismatched job_codes and titles*/
 SELECT
 	COUNT(
@@ -219,7 +221,7 @@ FROM
 	cps_data;
 ```
 
-## Analysis
+## Results at a Glance
 ### What Departments Lead in Average Base Pay?
 ![](https://github.com/rp2323/data_analysis_portfolio/blob/46424c0464f9ee898bc5185ed72c5d5e44be8374/city_parish_salaries_project/images/base_pay_dept.png)
 
@@ -243,6 +245,12 @@ FROM
 ### How Have Base Pay And Gross Pay Trended Over the Past Five Years?
 
 ![bp_vs_gp_allyrs_2](https://github.com/rp2323/data_analysis_portfolio/blob/46424c0464f9ee898bc5185ed72c5d5e44be8374/city_parish_salaries_project/images/bp_vs_gp_allyrs_2.png)
+
+## Explore the Code
+[SQL code](https://github.com/rp2323/data_analysis_portfolio/blob/main/city_parish_salaries_project/sql/city_parish_salary_sql)
+
+## Explore the Dashboard
+[Tableau dashboard](https://public.tableau.com/app/profile/rp1772/viz/baton_rouge_completed_dashboard_1/Dashboard1)
 
 
 
