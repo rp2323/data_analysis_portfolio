@@ -56,7 +56,7 @@ The state of Iowa's Alcoholic Beverages Division wants to know more about the li
 
 ## Limitations
 * **Documentation** - the counts for store number/names, category number/names, vendor number/names were all imbalanced by small amounts (no more than 10 in all cases). Ideally, I would have been able to check these inconsistencies against documentation around the coding system. Without that, I deferred to aggregating/computing using the names, which were distinct. 
-* **Confirmation** - The order dates tended to be weekdays with orders rarely occurring on weekends (less than 2%). It's reasonable to assume that there's a reasonable explanation for the rarity of weekend orders, but confirming this with someone would have helped solidify confidence in the data.  
+* **Confirmation** - The order dates tended to be weekdays with orders rarely occurring on weekends (less than 2%). I feel pretty safe in assuming that there's a reasonable explanation for the rarity of weekend orders, but confirming this with someone would have helped solidify my confidence in the data.  
 ![](https://github.com/rp2323/data_analysis_portfolio/blob/2a07ff88e734cca3779b61baac6497e4017c91d1/iowa_2019_liquor_sales_project/images/orders_by_day_of_week.png)
 
 ## Explore the Code
