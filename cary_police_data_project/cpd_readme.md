@@ -107,7 +107,7 @@ No columns had missing values.
 
 # Analysis
 ## What Is the Overall Trend from the Past Six Years? 
-**Overall recorded police incidents saw a gradual decline between from 2017 to 2022, with a decline of -21%**. 
+**Overall recorded police incidents declined 21% from 2017 to 2022.** 
 
 ![image4](https://github.com/rp2323/data_analysis_portfolio/blob/23e766765721ca6f40473e9ef7108db872492514/cary_police_data_project/images/total_incidents.png)
 <sub>*graph created in Excel</sub>  
@@ -116,7 +116,7 @@ No columns had missing values.
 <sub>*graph created in Excel</sub>  
 
 ## What Types of Incidents Are Most Commonly Reported?
-When broken down by category, **the incident category “all other” accounted for 58-62%** of police incidents while **larceny accounted for 26-29%**: 
+When incidents were broken down by category, **the “all other” category accounted for 58-62%** of police incidents while **larceny accounted for 26-29%**. 
 
 ![image2](https://github.com/rp2323/data_analysis_portfolio/blob/23e766765721ca6f40473e9ef7108db872492514/cary_police_data_project/images/incidents_by_category.png)
 <sub>*graph created in Excel</sub>  
@@ -137,13 +137,15 @@ Example:
 * 13B - *simple assault*
 * 13C - *intimidation*
 
-However, some incidents with the same UCR (26A) code were logged with distinct crime_type descriptions: 
+However, some incidents with the same Universal Crime Reporting code (26A) were logged with distinct crime_type descriptions: 
 * *fraud - confidence games/larceny by trick*
 * *fraud - failure to return hired property*
 * *fraud - obtaining property by false pretense*
 * *fraud - pharmaceutical fraud*
 
-To facilitate the analysis, I used XLOOKUP in Excel to standardize the crime type entries so that similar incident types would be grouped together. (For the example above, the four crime types were standardized as simply ‘fraud.’) Once the recategorization was complete I uploaded the cpd_data2 table data to Postgres as 'cpd_data3' with an added column of standardized incident types.
+To facilitate the analysis, I used XLOOKUP in Excel to standardize the crime type entries so that similar incident types would be grouped together. For the example above, the four crime types were standardized as simply ‘fraud.’ 
+
+Once the recategorization was complete I uploaded the cpd_data2 table data to Postgres as 'cpd_data3' with an added column of standardized incident types.
 
 Those adjustments helped draw insights from the 'all other' category, with fraud consistently composing the majority of the category's incidents, followed by destruction/damage/vandalism of property.  
 
@@ -162,7 +164,9 @@ GROUP BY
 ![all_other_heatmap](https://github.com/rp2323/data_analysis_portfolio/blob/23e766765721ca6f40473e9ef7108db872492514/cary_police_data_project/images/all_other_heatmap.png)
 
 ## How Do the Top Incidents Types Compare?
-Once I was able to establish that different types of fraud were the most common 'all other' incident type, I was curious how they compared with the most common non-'all other' type, larceny. *While larceny maintained a steady percentage of 26-29%, fraud incidents accounted for 11-15%, or roughly half of the lareceny incidents.*
+Once I was able to establish that different types of fraud were the most common 'all other' incident type, I was curious how they compared with the most common non-'all other' type, larceny. 
+
+While larceny maintained a steady percentage of 26-29%, **fraud incidents accounted for 11-15%, or roughly half of the larceny incidents.**
 
 ![fraud_vs_larceny](https://github.com/rp2323/data_analysis_portfolio/blob/23e766765721ca6f40473e9ef7108db872492514/cary_police_data_project/images/fraud_vs_larceny.png) 
 <sub>*graph created in Excel</sub> 
