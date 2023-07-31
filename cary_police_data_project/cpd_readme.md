@@ -109,21 +109,21 @@ No columns had missing values.
 ## What Is the Overall Trend from the Past Six Years? 
 **Overall recorded police incidents saw a gradual decline between from 2017 to 2022, with a decline of -21%**. 
 
-![image4](https://github.com/rp2323/cary_nc_crime_data/assets/126728422/53676e40-c71a-4213-be97-caf04173b76c)
+![image4](https://github.com/rp2323/data_analysis_portfolio/blob/23e766765721ca6f40473e9ef7108db872492514/cary_police_data_project/images/total_incidents.png)
 <sub>*graph created in Excel</sub>  
 
-![image5](https://github.com/rp2323/cary_nc_crime_data/assets/126728422/9081bfb0-b066-49c9-9e44-506214283dbf)
+![image5](https://github.com/rp2323/data_analysis_portfolio/blob/23e766765721ca6f40473e9ef7108db872492514/cary_police_data_project/images/total_incident_change.png)
 <sub>*graph created in Excel</sub>  
 
 ## What Types of Incidents Are Most Commonly Reported?
 When broken down by category, **the incident category “all other” accounted for 58-62%** of police incidents while **larceny accounted for 26-29%**: 
 
-![image2](https://github.com/rp2323/cary_nc_crime_data/assets/126728422/b0f4c41d-a704-473f-baf4-3ed7561b2ed2)
+![image2](https://github.com/rp2323/data_analysis_portfolio/blob/23e766765721ca6f40473e9ef7108db872492514/cary_police_data_project/images/incidents_by_category.png)
 <sub>*graph created in Excel</sub>  
 
 **Incidents involving motor vehicle theft increased almost 300%** over the six-year period: 
 
-![motor_v_theft_by_year](https://github.com/rp2323/cary_nc_crime_data/assets/126728422/68ddff54-ea47-4171-9987-25c806bcff81)
+![motor_v_theft_by_year](https://github.com/rp2323/data_analysis_portfolio/blob/23e766765721ca6f40473e9ef7108db872492514/cary_police_data_project/images/motor_v_theft_by_year.png)
 <sub>*graph created in Excel</sub>  
 
 Otherwise, the trends amongst the major crime categories remained stable. 
@@ -159,9 +159,10 @@ GROUP BY
 	new_crime_type, year;
 ```
 
-![all_other_heatmap](https://github.com/rp2323/cary_nc_crime_data/assets/126728422/5ecf0bc1-a2b8-488b-b9f5-900ef6afe819)
+![all_other_heatmap](https://github.com/rp2323/data_analysis_portfolio/blob/23e766765721ca6f40473e9ef7108db872492514/cary_police_data_project/images/all_other_heatmap.png)
 
 ## How Do the Top Incidents Types Compare?
 Once I was able to establish that different types of fraud were the most common 'all other' incident type, I was curious how they compared with the most common non-'all other' type, larceny. *While larceny maintained a steady percentage of 26-29%, fraud incidents accounted for 11-15%, or roughly half of the lareceny incidents.*
 
-![fraud_vs_larceny](https://github.com/rp2323/data_analysis_portfolio/assets/126728422/0987d3b4-857f-4f7b-93c2-d0feb92fe559)
+![fraud_vs_larceny](https://github.com/rp2323/data_analysis_portfolio/blob/23e766765721ca6f40473e9ef7108db872492514/cary_police_data_project/images/fraud_vs_larceny.png)
+<sub>*graph created in Excel</sub> 
