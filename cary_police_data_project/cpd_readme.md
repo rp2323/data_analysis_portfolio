@@ -3,7 +3,7 @@ In 2022, Cary was ranked as America’s “safest” small city by the [backgrou
 
 As a Cary resident, I was interested in answering the following questions: 
 
-* [What is the overall trend over the past six years (three pre-COVID + three during-COVID)?](#what-is-the-overall-trend-from-the-past-six-years) 
+* [How have police incidents trended overall over the past six years (three pre-COVID + three during-COVID)?](#what-is-the-overall-trend-from-the-past-six-years) 
 * [What types of police incidents are most commonly reported in Cary?](#what-types-of-incidents-are-most-commonly-reported)
 * [How do the top incident types compare in frequency?](#how-do-the-top-incidents-types-compare)
 
@@ -14,12 +14,14 @@ As a Cary resident, I was interested in answering the following questions:
 4. The most common crime types were larceny and fraud. Combined, they accounted for roughly 40% of all incidents, with larceny roughly doubling different types of fraud.  
 
 ## About the Data 
-The analysis was based on the [Town of Cary Police Incident dataset](https://data.townofcary.org/explore/dataset/cpd-incidents/export/?disjunctive.crime_category&disjunctive.crime_type&disjunctive.crimeday&disjunctive.district&disjunctive.offensecategory&disjunctive.violentproperty&disjunctive.total_incidents&disjunctive.year&dataChart=eyJxdWVyaWVzIjpbeyJjaGFydHMiOlt7InR5cGUiOiJjb2x1bW4iLCJmdW5jIjoiQ09VTlQiLCJ5QXhpcyI6InRvdGFsX2luY2lkZW50cyIsImNvbG9yIjoiIzJCM0Y1NiIsInNjaWVudGlmaWNEaXNwbGF5Ijp0cnVlfV0sInhBeGlzIjoieWVhciIsIm1heHBvaW50cyI6IiIsInRpbWVzY2FsZSI6IiIsInNvcnQiOiIiLCJzZXJpZXNCcmVha2Rvd25UaW1lc2NhbGUiOiIiLCJjb25maWciOnsiZGF0YXNldCI6ImNwZC1pbmNpZGVudHMiLCJvcHRpb25zIjp7ImRpc2p1bmN0aXZlLmNyaW1lX2NhdGVnb3J5Ijp0cnVlLCJkaXNqdW5jdGl2ZS5jcmltZV90eXBlIjp0cnVlLCJkaXNqdW5jdGl2ZS5jcmltZWRheSI6dHJ1ZSwiZGlzanVuY3RpdmUuZGlzdHJpY3QiOnRydWUsImRpc2p1bmN0aXZlLm9mZmVuc2VjYXRlZ29yeSI6dHJ1ZSwiZGlzanVuY3RpdmUudmlvbGVudHByb3BlcnR5Ijp0cnVlLCJkaXNqdW5jdGl2ZS50b3RhbF9pbmNpZGVudHMiOnRydWUsImRpc2p1bmN0aXZlLnllYXIiOnRydWV9fX1dLCJ0aW1lc2NhbGUiOiIiLCJkaXNwbGF5TGVnZW5kIjp0cnVlLCJhbGlnbk1vbnRoIjp0cnVlfQ%3D%3D). Some of the key attributes that the data encompasses are: 
+The analysis was based on the [Town of Cary Police Incident dataset](https://data.townofcary.org/explore/dataset/cpd-incidents/export/?disjunctive.crime_category&disjunctive.crime_type&disjunctive.crimeday&disjunctive.district&disjunctive.offensecategory&disjunctive.violentproperty&disjunctive.total_incidents&disjunctive.year&dataChart=eyJxdWVyaWVzIjpbeyJjaGFydHMiOlt7InR5cGUiOiJjb2x1bW4iLCJmdW5jIjoiQ09VTlQiLCJ5QXhpcyI6InRvdGFsX2luY2lkZW50cyIsImNvbG9yIjoiIzJCM0Y1NiIsInNjaWVudGlmaWNEaXNwbGF5Ijp0cnVlfV0sInhBeGlzIjoieWVhciIsIm1heHBvaW50cyI6IiIsInRpbWVzY2FsZSI6IiIsInNvcnQiOiIiLCJzZXJpZXNCcmVha2Rvd25UaW1lc2NhbGUiOiIiLCJjb25maWciOnsiZGF0YXNldCI6ImNwZC1pbmNpZGVudHMiLCJvcHRpb25zIjp7ImRpc2p1bmN0aXZlLmNyaW1lX2NhdGVnb3J5Ijp0cnVlLCJkaXNqdW5jdGl2ZS5jcmltZV90eXBlIjp0cnVlLCJkaXNqdW5jdGl2ZS5jcmltZWRheSI6dHJ1ZSwiZGlzanVuY3RpdmUuZGlzdHJpY3QiOnRydWUsImRpc2p1bmN0aXZlLm9mZmVuc2VjYXRlZ29yeSI6dHJ1ZSwiZGlzanVuY3RpdmUudmlvbGVudHByb3BlcnR5Ijp0cnVlLCJkaXNqdW5jdGl2ZS50b3RhbF9pbmNpZGVudHMiOnRydWUsImRpc2p1bmN0aXZlLnllYXIiOnRydWV9fX1dLCJ0aW1lc2NhbGUiOiIiLCJkaXNwbGF5TGVnZW5kIjp0cnVlLCJhbGlnbk1vbnRoIjp0cnVlfQ%3D%3D). 
+
+Some of the key attributes of the data: 
 
 * Beginning/end dates and times of each incident 
 * Crime category and type (more or less a sub-category) 
-* Geographical coordinates. 
-* A column devoted to the UCR (uniform crime reporting) code.   
+* Geographical coordinates 
+* A column devoted to the UCR (uniform crime reporting) code   
 <sub>*The FBI’s Uniform Crime Reporting Program is intended to standardize crime reporting across jurisdictions to aid in the statistical analysis of crime nationwide.</sub>    
 
 Prior to data cleaning, I created a new table composed of only the columns pertinent to analysis, which was restricted to the three “pre-COVID” years (2017-2019) and three COVID years (2020-2022).   
@@ -27,8 +29,7 @@ Prior to data cleaning, I created a new table composed of only the columns perti
 This narrowed set included data for **28,395 unique police incidents**.
 
 ```sql
-/*Select subset of columns for analysis and add them to a new table, recategorize crime types 
-within the 'all other' category to assist aggregation*/
+/*Select subset of columns for analysis and add them to a new table*/
 SELECT
 	ucr
 	,record
@@ -50,9 +51,14 @@ WHERE
 	EXTRACT(year FROM end_date_of_occurrence) in (2017, 2018, 2019, 2020, 2021, 2022);
 ```
 ## Data Cleaning
-After uploading the data table to a local PostgreSQL server, I reviewed for the following potentially problematic data characteristics: null values and missing values. Mixed and invalid data types were addressed when the CSV was initially loaded into Postgres.  
+After uploading the data table to a local PostgreSQL server, I reviewed for the following potentially problematic data characteristics: 
+
+* Null values
+* Missing values
+* Mixed and invalid data types (addressed in the CSV prior to loading the dataset to Postgres)
+
 ```sql
-/*Identify NULL values from each column by subtracting column counts from all counts.*/ 
+/*Identify NULL values from each column by subtracting column counts (rows with values) from 'all' counts (rows with NULLs)*/ 
 SELECT
 	COUNT(lon) - COUNT(*) AS lon_null_count
 	,COUNT(record) - COUNT(*) AS record_null_count
@@ -70,12 +76,11 @@ FROM
   cpd_data2;
 ```
 ```sql
-/*Select counts by year of NULL values in rows: latitude, longitude, location, 
-or begin time of occurrence values per previous query*/
+/*Select counts of NULL values in rows grouped by year for latitude, longitude, location, 
+or begin time of occurrence*/
 SELECT 
 	,EXTRACT(year FROM end_date_of_occurrence), 
-	,COUNT(CASE WHEN begin_time_of_occurrence IS NULL 
-	,OR lat IS NULL OR lon IS NULL or location IS NULL THEN record END) as null_count
+	,COUNT(CASE WHEN begin_time_of_occurrence IS NULL OR lat IS NULL OR lon IS NULL or location IS NULL THEN record END) as null_count
 FROM
 	cpd_data2
 GROUP BY
@@ -96,9 +101,9 @@ WHERE
 	OR location = '';
 ```
 
-I discovered **147 rows with null values for the geographic variables latitude, longitiude, and location and one row where the begin time of occurrence was null**. Because other valuable categorical data was still present for these rows, I retained them but noted that they would need to be excluded for any future geographical analysis. No columns had missing values. 
+I discovered **147 rows with null values for the geographic variables latitude, longitiude, and location and one row where the begin time of occurrence was null**. Because other valuable categorical data was still present for these rows, I retained them but noted that they would need to be excluded for any future geographical analysis. 
 
-Once null and blank values were addressed, I reviewed the record numbers column for duplicate values, which I’d established as the ID column for each unique incident.  
+No columns had missing values. 
 
 # Analysis
 ## What Is the Overall Trend from the Past Six Years? 
