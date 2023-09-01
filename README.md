@@ -7,3 +7,4 @@ This repository will include summary writeups for all my data analysis projects 
 * [Iowa Liquor Sales Data Analysis](https://github.com/rp2323/data_analysis_portfolio/tree/main/iowa_2019_liquor_sales_project)
 
 [LinkedIn Profile](http://www.linkedin.com/in/raphael-peterson-03212073)
+[Tableau Profile](https://public.tableau.com/app/profile/rp1772)
